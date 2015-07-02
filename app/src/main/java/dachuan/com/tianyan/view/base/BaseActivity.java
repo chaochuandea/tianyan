@@ -1,0 +1,54 @@
+package dachuan.com.tianyan.view.base;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
+
+import butterknife.ButterKnife;
+import dachuan.com.tianyan.AppManager;
+import rx.Observable;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
+import rx.subscriptions.CompositeSubscription;
+
+import static rx.android.app.AppObservable.bindActivity;
+
+/**
+ * Created by maibenben on 2015/7/2.
+ */
+public  abstract  class BaseActivity extends AppCompatActivity {
+    private final CompositeSubscription subscription = new CompositeSubscription();
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(getLayoutId());
+        init(savedInstanceState);
+        AppManager.getAppManager().addActivity(this);
+        ButterKnife.bind(this);
+    }
+    public abstract void init(Bundle savedInstanceState);
+    public abstract int getLayoutId();
+
+    @Override protected void onPause() {
+        subscription.clear();
+        super.onPause();
+    }
+
+    protected <T> void subscribe(Observable<T> observable) {
+        subscribe(observable, t -> {
+        });
+    }
+
+    protected  <T> void subscribe(Observable<T> observable, Action1<? super T> onNext) {
+        final Context context = this;
+        subscription.add(bindActivity(this, observable.subscribeOn(Schedulers.io())).subscribe(onNext,
+                throwable -> Toast.makeText(context, throwable.getMessage(), Toast.LENGTH_SHORT).show()));
+    }
+
+    protected  <T> void subscribe(Observable<T> observable, Action1<? super T> onNext,Action1<Throwable> onError) {
+        final Context context = this;
+        subscription.add(bindActivity(this, observable.subscribeOn(Schedulers.io())).subscribe(onNext,onError));
+    }
+}
