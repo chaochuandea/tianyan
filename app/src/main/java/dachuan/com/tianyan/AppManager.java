@@ -1,13 +1,5 @@
 package dachuan.com.tianyan;
 
-import android.app.Activity;
-import android.app.ActivityManager;
-import android.content.Context;
-
-import java.util.ArrayList;
-import java.util.Stack;
-
-
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -17,9 +9,9 @@ import android.app.ActivityManager;
 import android.content.Context;
 
 /**
- * @author linghong@xizi.com
- * @date 2014-6-24 ÉÏÎç10:20:50
- * @description: Ó¦ÓÃ³ÌĞòActivity¹ÜÀíÀà£ºÓÃÓÚActivity¹ÜÀíºÍÓ¦ÓÃ³ÌĞòÍË³ö
+ * @author linghong@xizi.com   
+ * @date 2014-6-24 ä¸Šåˆ10:20:50
+ * @description: åº”ç”¨ç¨‹åºActivityç®¡ç†ç±»ï¼šç”¨äºActivityç®¡ç†å’Œåº”ç”¨ç¨‹åºé€€å‡º
  * @version
  */
 public class AppManager {
@@ -31,7 +23,7 @@ public class AppManager {
     }
 
     /**
-     * µ¥Ò»ÊµÀı
+     * å•ä¸€å®ä¾‹
      */
     public static AppManager getAppManager() {
         if (instance == null) {
@@ -41,7 +33,7 @@ public class AppManager {
     }
 
     /**
-     * Ìí¼ÓActivityµ½¶ÑÕ»
+     * æ·»åŠ Activityåˆ°å †æ ˆ
      */
     public void addActivity(Activity activity) {
         if (activityStack == null) {
@@ -58,7 +50,7 @@ public class AppManager {
         return false;
     }
     /**
-     * »ñÈ¡µ±Ç°Activity£¨¶ÑÕ»ÖĞ×îºóÒ»¸öÑ¹ÈëµÄ£©
+     * è·å–å½“å‰Activityï¼ˆå †æ ˆä¸­æœ€åä¸€ä¸ªå‹å…¥çš„ï¼‰
      */
     public Activity currentActivity() {
         Activity activity = activityStack.lastElement();
@@ -66,7 +58,7 @@ public class AppManager {
     }
 
     /**
-     * ½áÊøµ±Ç°Activity£¨¶ÑÕ»ÖĞ×îºóÒ»¸öÑ¹ÈëµÄ£©
+     * ç»“æŸå½“å‰Activityï¼ˆå †æ ˆä¸­æœ€åä¸€ä¸ªå‹å…¥çš„ï¼‰
      */
     public void finishActivity() {
         Activity activity = activityStack.lastElement();
@@ -74,7 +66,7 @@ public class AppManager {
     }
 
     /**
-     * ½áÊøÖ¸¶¨µÄActivity
+     * ç»“æŸæŒ‡å®šçš„Activity
      */
     public void finishActivity(Activity activity) {
         if (activity != null) {
@@ -85,7 +77,7 @@ public class AppManager {
     }
 
     /**
-     * ½áÊøÖ¸¶¨ÀàÃûµÄActivity
+     * ç»“æŸæŒ‡å®šç±»åçš„Activity
      */
     public void finishActivity(Class<?> cls) {
         ArrayList<Activity> delList = new ArrayList<Activity>();
@@ -100,7 +92,7 @@ public class AppManager {
     }
 
     /**
-     * ½áÊøËùÓĞActivity
+     * ç»“æŸæ‰€æœ‰Activity
      */
     public void finishAllActivity() {
         for (int i = 0, size = activityStack.size(); i < size; i++) {
@@ -116,7 +108,7 @@ public class AppManager {
     }
 
     /**
-     * ÍË³öÓ¦ÓÃ³ÌĞò
+     * é€€å‡ºåº”ç”¨ç¨‹åº
      */
     @SuppressWarnings("deprecation")
     public void AppExit(Context context) {
@@ -131,14 +123,14 @@ public class AppManager {
     }
 
     /**
-     * ½«Ö¸¶¨ActivityÒÆ³ı¶ÑÕ»
+     * å°†æŒ‡å®šActivityç§»é™¤å †æ ˆ
      */
     public void removeActivityFromStack(Activity activity) {
         activityStack.remove(activity);
     }
 
     /**
-     * ËÑË÷Õ»ÖĞÊÇ·ñ´æÔÚµ±Ç°ÀàÃûActivity
+     * æœç´¢æ ˆä¸­æ˜¯å¦å­˜åœ¨å½“å‰ç±»åActivity
      */
     public boolean contains(Class<?> cls) {
         for (Activity activity : activityStack) {
@@ -150,4 +142,3 @@ public class AppManager {
     }
 
 }
-
