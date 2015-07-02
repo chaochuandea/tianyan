@@ -30,6 +30,6 @@ public class MainActivity extends BaseActivity {
 
 
     private void getData(){
-       subscribe( Client.getApiService().getUser(),user -> Timber.d(user.toString()));
+       subscribe( Client.getApiService().getUser().map(user1 -> {return user1;}),user -> Timber.d(user.toString()));
     }
 }
