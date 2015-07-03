@@ -2,8 +2,11 @@ package dachuan.com.tianyan.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.squareup.okhttp.OkHttpClient;
 
+import dachuan.com.tianyan.BuildConfig;
 import retrofit.RestAdapter;
+import retrofit.client.OkClient;
 import retrofit.converter.GsonConverter;
 
 /**
@@ -18,9 +21,13 @@ public class Client {
                 .setDateFormat("yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'SSS'Z'")
                 .create();
 
+        OkHttpClient okHttpClient = new OkHttpClient();
         RestAdapter restAdapter = new RestAdapter.Builder()
-                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setLogLevel(BuildConfig.DEBUG ?
+                        RestAdapter.LogLevel.FULL :
+                        RestAdapter.LogLevel.NONE)
                 .setEndpoint(GithubService.URL)
+                .setClient(new OkClient(okHttpClient))
                 .setConverter(new GsonConverter(gson))
                 .build();
 
