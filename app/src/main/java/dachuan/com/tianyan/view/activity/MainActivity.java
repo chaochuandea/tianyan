@@ -21,6 +21,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void init(Bundle savedInstanceState) {
         text.setText("hello");
+        getData();
     }
 
     @Override
@@ -30,6 +31,6 @@ public class MainActivity extends BaseActivity {
 
 
     private void getData(){
-       subscribe( Client.getApiService().getUser().map(user1 -> {return user1;}),user -> Timber.d(user.toString()));
+       subscribe( Client.getApiService().getUser().map(user1 -> {user1.setUser("ssssssss");Timber.d(user1.getUser());; return user1;}),user -> Timber.d(user.toString()));
     }
 }
