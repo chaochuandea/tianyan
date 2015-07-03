@@ -20,12 +20,10 @@ public class MainActivity extends BaseActivity {
 
     private String token;
 
-    @Bind(R.id.text)
-    TextView text;
+
 
     @Override
     public void init(Bundle savedInstanceState) {
-        text.setText("hello");
         initData();
         token = getIntent().getStringExtra(MainActivity.INTENT_TOKEN);
         pageTask = new PageTask();
