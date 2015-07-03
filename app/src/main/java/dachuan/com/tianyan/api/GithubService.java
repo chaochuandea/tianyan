@@ -1,5 +1,7 @@
 package dachuan.com.tianyan.api;
 
+import java.util.List;
+
 import dachuan.com.tianyan.model.User;
 import retrofit.http.POST;
 import rx.Observable;
@@ -11,5 +13,5 @@ public interface GithubService {
     public static String URL ="http://baidu.com";
 
     @POST("/user")
-    Observable<User> getUser();
+    Observable<List<User>> getUser(int page);
 }
