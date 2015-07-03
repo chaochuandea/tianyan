@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.drawee.view.SimpleDraweeView;
+
 import java.util.List;
 
 import dachuan.com.tianyan.R;
@@ -15,10 +17,10 @@ import dachuan.com.tianyan.R;
 /**
  * Created by linsj on 15-7-2.
  */
-public class Myadapter extends RecyclerView.Adapter{
+public class EveryDayAdapter extends RecyclerView.Adapter{
 
     private  List<String> list;
-    public Myadapter(List<String> list) {
+    public EveryDayAdapter(List<String> list) {
         this.list = list;
     }
 
@@ -31,8 +33,7 @@ public class Myadapter extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder)holder;
-        viewHolder.text.setText("Hello , " + list.get(position));
-        viewHolder.image.setImageResource(R.mipmap.ic_launcher);
+        viewHolder.name.setText("Hello , " + list.get(position));
     }
 
     @Override
@@ -42,12 +43,14 @@ public class Myadapter extends RecyclerView.Adapter{
 
     static class ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView text;
-        ImageView image;
+        SimpleDraweeView cover,cover_bg;
+        TextView name,tag_and_time;
         public ViewHolder(View itemView) {
             super(itemView);
-            text = (TextView) itemView.findViewById(R.id.view_text);
-            image = (ImageView) itemView.findViewById(R.id.img);
+            name = (TextView) itemView.findViewById(R.id.name);
+            tag_and_time = (TextView) itemView.findViewById(R.id.tag_and_time);
+//            cover = (SimpleDraweeView) itemView.findViewById(R.id.cover);
+//            cover_bg = (SimpleDraweeView) itemView.findViewById(R.id.cover_bg);
         }
     }
 }

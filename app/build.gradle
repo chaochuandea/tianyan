@@ -42,4 +42,5 @@ dependencies {
     compile files('libs/testinagent.jar')
     compile 'com.android.support:recyclerview-v7:22.2.0'
     compile 'com.android.support:support-v4:22.2.0'
+    compile 'uk.co.chrisjenx:calligraphy:2.1.0'
 }

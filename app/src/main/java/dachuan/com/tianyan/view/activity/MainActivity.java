@@ -16,7 +16,7 @@ import dachuan.com.tianyan.api.Client;
 import dachuan.com.tianyan.model.Cache;
 import dachuan.com.tianyan.task.CacheTask;
 import dachuan.com.tianyan.task.PageTask;
-import dachuan.com.tianyan.view.adapter.Myadapter;
+import dachuan.com.tianyan.view.adapter.EveryDayAdapter;
 import dachuan.com.tianyan.view.base.BaseActivity;
 import rx.Observable;
 import rx.Scheduler;
@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity {
 
     private String token;
 
-    private Myadapter adapter;
+    private EveryDayAdapter adapter;
 
     private List<String> datalist = new ArrayList<String>();
 
@@ -51,7 +51,7 @@ public class MainActivity extends BaseActivity {
         pageTask = new PageTask();
         pageTask.getPageSubject().onNext(1);
 
-        adapter = new Myadapter(datalist);
+        adapter = new EveryDayAdapter(datalist);
         mainlist.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mainlist.setAdapter(adapter);
         initListener();

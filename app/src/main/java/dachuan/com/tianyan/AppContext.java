@@ -1,6 +1,7 @@
 package dachuan.com.tianyan;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import com.testin.agent.TestinAgent;
@@ -8,6 +9,8 @@ import com.testin.agent.TestinAgent;
 import dachuan.com.tianyan.util.log.FakeCrashLibrary;
 import de.greenrobot.event.EventBus;
 import timber.log.Timber;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Created by maibenben on 2015/7/2.
@@ -27,6 +30,15 @@ public class AppContext extends Application {
         bus = new EventBus();
         instance = this;
         TestinAgent.init(this, "764a9393a5053e48d6927c4877bb87c8", "");
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/RobotoCondensed-Regular.ttf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(base));
     }
 
     public static AppContext instance(){
