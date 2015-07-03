@@ -1,10 +1,10 @@
 package dachuan.com.tianyan.view.activity;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.animation.Animation;
-
-import com.facebook.drawee.view.DraweeView;
 
 import butterknife.Bind;
 import dachuan.com.tianyan.R;
@@ -26,24 +26,15 @@ public class StartActivity extends BaseActivity {
 
     @Override
     public void init(Bundle savedInstanceState) {
-        zoom_img.setListener(new Animation.AnimationListener() {
+        zoom_img.setListener(new AnimatorListenerAdapter() {
             @Override
-            public void onAnimationStart(Animation animation) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
+            public void onAnimationEnd(Animator animation) {
                 Intent intent = new Intent(StartActivity.this,MainActivity.class);
                 startActivity(intent);
                 finish();
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
 
             }
         });
-        zoom_img.ActZoom(1.05f,2000);
+        zoom_img.actZoom(1.05f, 2000);
     }
 }
