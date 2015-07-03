@@ -44,3 +44,6 @@ Thumbs.db
 .gradle
 build/
 
+.idea/compiler.xml
+.idea/gradle.xml
+.idea/modules.xml
