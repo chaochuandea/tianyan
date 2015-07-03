@@ -56,7 +56,7 @@ public class MainActivity extends BaseActivity {
         mainlist.setAdapter(adapter);
         initListener();
         initData();
-
+        getData();
     }
 
     @Override
@@ -75,22 +75,27 @@ public class MainActivity extends BaseActivity {
         }
 
     private void initListener(){
-
-
-
         swipe.setOnRefreshListener(()->{
-            subscribe(rx.Observable.timer(2, TimeUnit.SECONDS, Schedulers.io()),aLong1 -> {
+            subscribe(Observable.timer(2, TimeUnit.SECONDS, Schedulers.io()), aLong1 -> {
                 addData(10);
                 adapter.notifyDataSetChanged();
                 swipe.setRefreshing(false);
             });
         });
     }
+
+    private void getData() {
+        addData(10);
+        adapter.notifyDataSetChanged();
+        swipe.setRefreshing(false);
+
+    }
+
     private void addData(int size)
     {
         for (int i = 0 ;i < size ;i ++ )
         {
-            datalist.add("Item -> "  + i );
+            datalist.add("这是标题"  + i );
         }
     }
 
