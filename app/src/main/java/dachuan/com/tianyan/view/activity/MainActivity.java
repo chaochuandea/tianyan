@@ -1,6 +1,5 @@
 package dachuan.com.tianyan.view.activity;
 
-import android.database.Observable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +8,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import dachuan.com.tianyan.R;
@@ -18,7 +18,10 @@ import dachuan.com.tianyan.task.CacheTask;
 import dachuan.com.tianyan.task.PageTask;
 import dachuan.com.tianyan.view.adapter.Myadapter;
 import dachuan.com.tianyan.view.base.BaseActivity;
+import rx.Observable;
+import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 
@@ -72,28 +75,15 @@ public class MainActivity extends BaseActivity {
         }
 
     private void initListener(){
-        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            sleep(2000);
-                            addData(10);
-                            rx.Observable.just("")
-                                    .observeOn(AndroidSchedulers.mainThread())
-                                    .subscribe((s) -> {
-                                        adapter.notifyDataSetChanged();
-                                        swipe.setRefreshing(false);
-                                    });
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
 
-                    }
-                }.start();
-            }
+
+
+        swipe.setOnRefreshListener(()->{
+            subscribe(rx.Observable.timer(2, TimeUnit.SECONDS, Schedulers.io()),aLong1 -> {
+                addData(10);
+                adapter.notifyDataSetChanged();
+                swipe.setRefreshing(false);
+            });
         });
     }
     private void addData(int size)

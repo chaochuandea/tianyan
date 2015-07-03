@@ -11,6 +11,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import butterknife.ButterKnife;
 import dachuan.com.tianyan.AppManager;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -48,12 +49,12 @@ public  abstract  class BaseActivity extends AppCompatActivity {
 
     protected  <T> void subscribe(Observable<T> observable, Action1<? super T> onNext) {
         final Context context = this;
-        subscription.add(bindActivity(this, observable.subscribeOn(Schedulers.io())).subscribe(onNext,
+        subscription.add(bindActivity(this, observable.subscribeOn(Schedulers.io())).observeOn(AndroidSchedulers.mainThread()).subscribe(onNext,
                 throwable -> Toast.makeText(context, throwable.getMessage(), Toast.LENGTH_SHORT).show()));
     }
 
     protected  <T> void subscribe(Observable<T> observable, Action1<? super T> onNext,Action1<Throwable> onError) {
         final Context context = this;
-        subscription.add(bindActivity(this, observable.subscribeOn(Schedulers.io())).subscribe(onNext,onError));
+        subscription.add(bindActivity(this, observable.subscribeOn(Schedulers.io())).observeOn(AndroidSchedulers.mainThread()).subscribe(onNext, onError));
     }
 }

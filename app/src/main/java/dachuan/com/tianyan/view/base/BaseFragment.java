@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import butterknife.ButterKnife;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -54,12 +55,12 @@ public abstract class BaseFragment  extends Fragment{
     }
 
     protected  <T> void subscribe(Observable<T> observable, Action1<? super T> onNext) {
-        subscription.add(bindFragment(this, observable.subscribeOn(Schedulers.io())).subscribe(onNext,
+        subscription.add(bindFragment(this, observable.subscribeOn(Schedulers.io())).observeOn(AndroidSchedulers.mainThread()).subscribe(onNext,
                 throwable -> Toast.makeText(getActivity(), throwable.getMessage(), Toast.LENGTH_SHORT).show()));
 
     }
 
     protected  <T> void subscribe(Observable<T> observable, Action1<? super T> onNext,Action1<Throwable> onError) {
-        subscription.add(bindFragment(this, observable.subscribeOn(Schedulers.io())).subscribe(onNext,onError));
+        subscription.add(bindFragment(this, observable.subscribeOn(Schedulers.io())).observeOn(AndroidSchedulers.mainThread()).subscribe(onNext,onError));
     }
 }
