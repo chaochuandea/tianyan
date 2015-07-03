@@ -3,6 +3,8 @@ package dachuan.com.tianyan;
 import android.app.Application;
 import android.util.Log;
 
+import com.testin.agent.TestinAgent;
+
 import dachuan.com.tianyan.util.log.FakeCrashLibrary;
 import de.greenrobot.event.EventBus;
 import timber.log.Timber;
@@ -24,6 +26,7 @@ public class AppContext extends Application {
         }
         bus = new EventBus();
         instance = this;
+        TestinAgent.init(this, "764a9393a5053e48d6927c4877bb87c8", "");
     }
 
     public static AppContext instance(){
