@@ -1,9 +1,6 @@
 package dachuan.com.tianyan.view.activity;
 
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
-import android.widget.AbsListView;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -23,16 +20,12 @@ public class MainActivity extends BaseActivity {
 
     private String token;
 
-    @Bind(R.id.swipe)
-    SwipeRefreshLayout swip;
-
-    @Bind(R.id.main_list)
-    RecyclerView mainlist;
-
-
+    @Bind(R.id.text)
+    TextView text;
 
     @Override
     public void init(Bundle savedInstanceState) {
+        text.setText("hello");
         initData();
         token = getIntent().getStringExtra(MainActivity.INTENT_TOKEN);
         pageTask = new PageTask();
