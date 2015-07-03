@@ -14,9 +14,11 @@ import timber.log.Timber;
 
 
 public class MainActivity extends BaseActivity {
-
+    private static String INTENT_TOKEN = "intent_token";
     private static String CACHE_KEY = "main_activity_data";
     private PageTask pageTask;
+
+    private String token;
 
     @Bind(R.id.text)
     TextView text;
@@ -25,6 +27,7 @@ public class MainActivity extends BaseActivity {
     public void init(Bundle savedInstanceState) {
         text.setText("hello");
         initData();
+        token = getIntent().getStringExtra(MainActivity.INTENT_TOKEN);
         pageTask = new PageTask();
         pageTask.getPageSubject().onNext(1);
     }
@@ -34,11 +37,10 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
-//接收page，然后cache,然后响应数据
+//接收page，开始请求数据,然后cache,然后响应数据
     private void initData(){
         pageTask.getPageSubject().subscribe(integer -> {
-                    subscribe(Client.getApiService().getUser(integer).map(user1 -> {
-                        user1.get(0).setUser("ssssssss");
+                    subscribe(Client.getApiService().getUser(token ,integer).map(user1 -> {
                         CacheTask.getCacheSubject().onNext(new Cache(CACHE_KEY,user1));
                         return user1;
                     }), user -> Timber.d(user.toString()));

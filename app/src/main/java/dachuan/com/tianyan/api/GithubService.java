@@ -13,5 +13,5 @@ public interface GithubService {
     public static String URL ="http://baidu.com";
 
     @POST("/user")
-    Observable<List<User>> getUser(int page);
+    Observable<List<User>> getUser(String token ,int page);
 }
