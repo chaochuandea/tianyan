@@ -40,4 +40,6 @@ dependencies {
     provided 'org.projectlombok:lombok:1.12.6'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile files('libs/testinagent.jar')
+    compile 'com.android.support:recyclerview-v7:22.2.0'
+    compile 'com.android.support:support-v4:22.2.0'
 }
