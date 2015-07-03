@@ -31,8 +31,10 @@ public  abstract  class BaseActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         init(savedInstanceState);
     }
-    public abstract void init(Bundle savedInstanceState);
+
     public abstract int getLayoutId();
+
+    public abstract void init(Bundle savedInstanceState);
 
     @Override protected void onPause() {
         subscription.clear();
