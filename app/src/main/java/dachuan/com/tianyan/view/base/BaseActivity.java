@@ -6,6 +6,8 @@ import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+
 import butterknife.ButterKnife;
 import dachuan.com.tianyan.AppManager;
 import rx.Observable;
@@ -23,13 +25,17 @@ public  abstract  class BaseActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fresco.initialize(this);
         setContentView(getLayoutId());
         AppManager.getAppManager().addActivity(this);
         ButterKnife.bind(this);
         init(savedInstanceState);
     }
-    public abstract void init(Bundle savedInstanceState);
+
     public abstract int getLayoutId();
+
+    public abstract void init(Bundle savedInstanceState);
+
 
     @Override protected void onPause() {
         subscription.clear();
