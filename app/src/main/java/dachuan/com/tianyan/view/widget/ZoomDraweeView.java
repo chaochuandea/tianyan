@@ -59,13 +59,5 @@ public class ZoomDraweeView extends SimpleDraweeView {
         this.listener = listener;
     }
 
-    public void setWidth(int width) {
-        this.getLayoutParams().width = width;
-        this.requestLayout();
-    }
 
-    public void setHeight(int height) {
-        this.getLayoutParams().height = height;
-        this.requestLayout();
-    }
 }
