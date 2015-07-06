@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -28,6 +29,11 @@ import timber.log.Timber;
 public class MainActivity extends BaseActivity {
     private static String INTENT_TOKEN = "intent_token";
     private static String CACHE_KEY = "main_activity_data";
+    @Bind(R.id.tool_bar)
+    public Toolbar toolbar;
+
+    @Bind(R.id.title)
+    TextView title;
 
     @Bind(R.id.main_list)
     public  RecyclerView mainlist;
@@ -47,6 +53,9 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void init(Bundle savedInstanceState) {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        title.setText("tianyan");
         token = getIntent().getStringExtra(MainActivity.INTENT_TOKEN);
         pageTask = new PageTask();
         pageTask.getPageSubject().onNext(1);

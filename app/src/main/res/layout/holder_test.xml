@@ -35,14 +35,19 @@
             android:textSize="20sp"
             android:textColor="@android:color/white"
            fontPath="fonts/Roboto-Bold.ttf"/>
-        <TextView
+        <dachuan.com.tianyan.view.widget.LodingIcon
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tag_and_time"
             android:textColor="@android:color/white"
             fontPath="fonts/Roboto-ThinItalic.ttf"
             android:layout_gravity="center"
-            android:text="你他买de"/>
+            android:text="s"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rotate"
+            android:src="@drawable/rotate"/>
     </LinearLayout>
 
 </RelativeLayout>

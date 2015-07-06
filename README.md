@@ -17,6 +17,7 @@
 8. [fresco](https://github.com/facebook/fresco) android 图片框架，他的实现机制与rxjava的实现如出一辙。他能很好的避免内存溢出
 9. [eventbus](https://github.com/greenrobot/EventBus) android 事件总线工具，虽然rxjava能很好的替代这个，但是用起来还是觉得这个很顺手
 10. [retrolambda](https://github.com/orfjackal/retrolambda) 支持lambda的语法，简化代码
+11 [calligraphy](https://github.com/chrisjenx/Calligraphy)textview 更换字体
 
 ## 技术点分析
 >
