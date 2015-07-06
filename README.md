@@ -20,12 +20,12 @@
 
 ## 技术点分析
 >
-1. ![放大ImageView动画](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/zoomiamgeview.png)
-2. ![loading效果](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/loading.png)
-3. ![Recycle+PullTorefresh+LoadMore](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/pulltorefresh.png)
-4. ![抽屉下拉效果](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/drag_down.png)
-5. ![recycle_view点击后item过度效果，textview动画和typeface设置，毛玻璃效果](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/blur.png)
-6. ![视频播放](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/media.png)
+1.  放大ImageView动画![放大ImageView动画](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/zoomiamgeview.png)
+2.  loading效果![loading效果](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/loading.png)
+3.  Recycle+PullTorefresh+LoadMore![Recycle+PullTorefresh+LoadMore](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/pulltorefresh.png)
+4.  抽屉下拉效果![抽屉下拉效果](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/drag_down.png)
+5.  recycle_view点击后item过度效果，textview动画和typeface设置，毛玻璃效果![recycle_view点击后item过度效果，textview动画和typeface设置，毛玻璃效果](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/blur.png)
+6.  视频播放![视频播放](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/media.png)
 
 
 
