@@ -15,6 +15,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import static rx.android.app.AppObservable.bindActivity;
 
@@ -31,6 +32,11 @@ public  abstract  class BaseActivity extends AppCompatActivity {
         AppManager.getAppManager().addActivity(this);
         ButterKnife.bind(this);
         init(savedInstanceState);
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
     public abstract int getLayoutId();
