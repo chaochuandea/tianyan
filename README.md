@@ -18,5 +18,15 @@
 9. [eventbus](https://github.com/greenrobot/EventBus) android 事件总线工具，虽然rxjava能很好的替代这个，但是用起来还是觉得这个很顺手
 10. [retrolambda](https://github.com/orfjackal/retrolambda) 支持lambda的语法，简化代码
 
+## 技术点分析
+>
+1. ![放大ImageView动画](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/zoomiamgeview.png)
+2. ![loading效果](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/loading.png)
+3. ![Recycle+PullTorefresh+LoadMore](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/pulltorefresh.png)
+4. ![抽屉下拉效果](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/drag_down.png)
+5. ![recycle_view点击后item过度效果，textview动画和typeface设置，毛玻璃效果](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/blur.png)
+6. ![视频播放](https://github.com/chaochuandea/tianyan/blob/master/screen_capture/media.png)
+
+
 
 
