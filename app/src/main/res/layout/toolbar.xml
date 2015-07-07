@@ -3,35 +3,89 @@
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:background="@color/white"
     android:elevation="4dp">
-<ImageView
-    android:layout_width="48dp"
-    android:layout_height="48dp"
-    android:padding="10dp"
-    android:id="@+id/icon"
-    android:src="@mipmap/menu"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="10dp"
+                android:id="@+id/icon"
+                android:src="@mipmap/menu"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        fontPath="fonts/Roboto-ThinItalic.ttf"
-        android:layout_gravity="center"
-        android:textSize="18sp"
-        android:id="@+id/time"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        fontPath="fonts/Roboto-ThinItalic.ttf"
-        android:layout_gravity="center"
-        android:textSize="28sp"
-        android:id="@+id/title"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fontPath="fonts/Roboto-ThinItalic.ttf"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:text="today"
+                android:id="@+id/time"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                fontPath="fonts/Roboto-ThinItalic.ttf"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="28sp"
+                android:id="@+id/title"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fontPath="fonts/Roboto-ThinItalic.ttf"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                android:text="today"
+                android:visibility="invisible"/>
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="10dp"
+                android:id="@+id/eye"
+                android:layout_gravity="right"
+                android:layout_marginRight="14dp"
+                android:src="@mipmap/eye"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/setting_con"
+            android:layout_width="match_parent"
+            android:background="@color/white"
+            android:visibility="invisible"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="10dp"
+                android:id="@+id/icon_back"
+                android:src="@mipmap/ic_back"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:gravity="center"
+                android:text="@string/setting"
+                android:id="@+id/title_setting"/>
 
 
-    <ImageView
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:padding="10dp"
-        android:id="@+id/eye"
-        android:layout_gravity="right"
-        android:layout_marginRight="14dp"
-        android:src="@mipmap/eye"/>
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="10dp"
+                android:visibility="invisible"
+                android:layout_gravity="right"
+                android:layout_marginRight="14dp"
+                android:src="@mipmap/eye"/>
+        </LinearLayout>
+    </FrameLayout>
+
 </android.support.v7.widget.Toolbar>

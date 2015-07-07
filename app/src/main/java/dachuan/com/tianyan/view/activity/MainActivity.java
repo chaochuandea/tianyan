@@ -35,15 +35,21 @@ public class MainActivity extends BaseActivity {
     @Bind(R.id.tool_bar)
     public Toolbar toolbar;
 
+    @Bind(R.id.setting_con)
+    View setting_con;
+    @Bind(R.id.setting_neirong)
+    View setting_neirong;
+
     @Bind(R.id.title)
     TextView title;
     @Bind(R.id.mine)
     View mine;
-    @Bind(R.id.setting)
-    View setting;
 
     @Bind(R.id.icon)
     ImageView icon;
+    @Bind(R.id.icon_back)
+    ImageView icon_back;
+
     @Bind(R.id.eye)
     ImageView eye;
 
@@ -64,23 +70,59 @@ public class MainActivity extends BaseActivity {
 
     Animation showAni,hideAni,right_in,right_out,rotate_90,rotate_0;
 
+    private boolean show_setting = false;
+
     @OnClick(R.id.icon)
     public void showMy(){
         animation_icon();
     }
 
     private void animation_icon() {
+        setting_con.setVisibility(View.INVISIBLE);
+        setting_neirong.setVisibility(View.INVISIBLE);
         if(mine.getVisibility() == View.VISIBLE){
+            show_setting = false;
             mine.setVisibility(View.INVISIBLE);
             mine.startAnimation(hideAni);
             icon.startAnimation(rotate_90);
+            eye.setImageResource(R.mipmap.eye);
 
         }else{
+            show_setting = true;
             mine.setVisibility(View.VISIBLE);
             mine.startAnimation(showAni);
             icon.startAnimation(rotate_0);
+            eye.setImageResource(R.mipmap.setting);
         }
     }
+
+    @OnClick(R.id.eye)
+   public void  eyeClick(){
+        if(show_setting){
+            showSetting();
+        }
+    }
+    @OnClick(R.id.icon_back)
+    public void icon_backClick(){
+        hideSetting();
+    }
+
+
+    public void showSetting(){
+        setting_con.setVisibility(View.VISIBLE);
+        setting_con.startAnimation(right_in);
+        setting_neirong.setVisibility(View.VISIBLE);
+        setting_neirong.startAnimation(right_in);
+    }
+
+
+    public void hideSetting(){
+        setting_con.setVisibility(View.INVISIBLE);
+        setting_con.startAnimation(right_out);
+        setting_neirong.setVisibility(View.INVISIBLE);
+        setting_neirong.startAnimation(right_out);
+    }
+
 
     @OnClick(R.id.up)
     public void show(){
