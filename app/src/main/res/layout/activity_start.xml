@@ -13,10 +13,57 @@
         fresco:placeholderImage="@mipmap/img_start"
         fresco:placeholderImageScaleType="centerCrop"
         />
-    <ProgressBar
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@mipmap/ic_eye_white"
+        android:id="@+id/eye"
+        android:layout_centerInParent="true"
+         />
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminateDrawable="@drawable/rotate"
-        android:layout_centerInParent="true"
-        android:indeterminateDuration="1800" />
+        android:id="@+id/app_name_en"
+        android:layout_below="@id/eye"
+        android:text="@string/app_name_en"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp"
+        android:textColor="@android:color/white"
+        fontPath="fonts/Roboto-Bold.ttf"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/app_name"
+        android:layout_below="@id/app_name_en"
+        android:text="@string/app_name"
+        android:layout_centerHorizontal="true"
+        android:textSize="30sp"
+        android:textColor="@android:color/white"
+        fontPath="fonts/Roboto-Bold.ttf"/>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/description"
+        android:layout_alignParentBottom="true"
+        android:text="@string/description"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="50dp"
+        fontPath="fonts/Roboto-Bold.ttf"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/description_en"
+        android:layout_marginBottom="15dp"
+        android:layout_above="@id/description"
+        android:text="@string/description_en"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        fontPath="fonts/Roboto-Bold.ttf"/>
 </RelativeLayout>
