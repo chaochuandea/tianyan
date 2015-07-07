@@ -3,6 +3,7 @@
     <string name="app_name_en">Eye In The Sky</string>
     <string name="description">每日精选视频推荐,让你大开眼界</string>
     <string name="description_en">Daily move,Daily up</string>
+    <string name="today_tips">今日精选>></string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 </resources>

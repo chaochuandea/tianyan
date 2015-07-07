@@ -79,6 +79,8 @@ public class MainActivity extends BaseActivity {
                     subscribe(Client.getApiService().getUser(token ,integer).map(user1 -> {
                         CacheTask.getCacheSubject().onNext(new Cache(CACHE_KEY,user1));
                         return user1;
+                    }).map(users -> {
+                        return  users.get(1).getUser().getBytes();
                     }), user -> Timber.d(user.toString()));
         });
         }

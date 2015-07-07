@@ -13,6 +13,12 @@
         fresco:placeholderImage="@mipmap/img_start"
         fresco:placeholderImageScaleType="centerCrop"
         />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/bg"
+        android:visibility="invisible"
+        android:background="@color/white"/>
     <ImageView
         android:layout_width="100dp"
         android:layout_height="100dp"
@@ -29,7 +35,7 @@
         android:layout_centerHorizontal="true"
         android:textSize="30sp"
         android:textColor="@android:color/white"
-        fontPath="fonts/Roboto-Bold.ttf"/>
+        fontPath="fonts/Roboto-ThinItalic.ttf"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,5 +71,32 @@
         android:layout_centerHorizontal="true"
         android:textSize="20sp"
         android:textColor="@android:color/white"
+        fontPath="fonts/Roboto-ThinItalic.ttf"/>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/today"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:textColor="@color/text_color_dark_secondary"
+        android:layout_marginBottom="50dp"
+        android:text="@string/today_tips"
+        android:visibility="invisible"
         fontPath="fonts/Roboto-Bold.ttf"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/time"
+        android:layout_marginBottom="15dp"
+        android:layout_above="@id/description"
+        android:layout_centerHorizontal="true"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        android:textColor="@color/text_color_dark_secondary"
+        fontPath="fonts/Roboto-ThinItalic.ttf"/>
 </RelativeLayout>
