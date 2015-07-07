@@ -23,6 +23,7 @@
                 fontPath="fonts/Roboto-ThinItalic.ttf"
                 android:layout_gravity="center"
                 android:textSize="18sp"
+                android:textColor="@color/text_color_primeray"
                 android:text="today"
                 android:id="@+id/time"/>
             <TextView
@@ -32,6 +33,7 @@
                 fontPath="fonts/Roboto-ThinItalic.ttf"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:textColor="@color/text_color_primeray"
                 android:textSize="28sp"
                 android:id="@+id/title"/>
 
@@ -41,6 +43,7 @@
                 fontPath="fonts/Roboto-ThinItalic.ttf"
                 android:layout_gravity="center"
                 android:textSize="18sp"
+                android:textColor="@color/text_color_primeray"
                 android:text="today"
                 android:visibility="invisible"/>
             <ImageView
@@ -73,6 +76,7 @@
                 android:layout_gravity="center"
                 android:textSize="20sp"
                 android:gravity="center"
+                android:textColor="@color/text_color_primeray"
                 android:text="@string/setting"
                 android:id="@+id/title_setting"/>
 

@@ -46,6 +46,7 @@
                     android:src="@mipmap/up_arrow"
                     android:scaleType="fitCenter"
                     android:id="@+id/up"
+                    android:background="@drawable/up_selector"
                     android:padding="10dp"
                     android:layout_height="48dp" />
             </LinearLayout>
