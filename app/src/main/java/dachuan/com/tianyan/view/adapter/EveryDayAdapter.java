@@ -1,5 +1,6 @@
 package dachuan.com.tianyan.view.adapter;
 
+import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RotateDrawable;
 import android.graphics.drawable.ScaleDrawable;
 import android.support.v7.widget.RecyclerView;
@@ -44,7 +45,9 @@ public class EveryDayAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder)holder;
         viewHolder.name.setText("Hello , " + list.get(position));
-        RotateDrawable rottate = (RotateDrawable) viewHolder.rotate.getDrawable();
+        LayerDrawable layerDrawable = (LayerDrawable) viewHolder.rotate.getDrawable();
+
+        RotateDrawable rottate = (RotateDrawable)layerDrawable.getDrawable(1);
         ValueAnimator animator =  ObjectAnimator.ofInt(0, 10000, 0);
         animator.setInterpolator(new AccelerateDecelerateInterpolator());
         animator.addUpdateListener(animation -> {
