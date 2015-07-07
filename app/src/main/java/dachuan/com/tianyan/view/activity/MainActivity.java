@@ -33,20 +33,23 @@ public class MainActivity extends BaseActivity {
     private static String INTENT_TOKEN = "intent_token";
     private static String CACHE_KEY = "main_activity_data";
     @Bind(R.id.tool_bar)
-    public Toolbar toolbar;
+     Toolbar toolbar;
 
     @Bind(R.id.setting_con)
     View setting_con;
+
     @Bind(R.id.setting_neirong)
     View setting_neirong;
 
     @Bind(R.id.title)
     TextView title;
+
     @Bind(R.id.mine)
     View mine;
 
     @Bind(R.id.icon)
     ImageView icon;
+
     @Bind(R.id.icon_back)
     ImageView icon_back;
 
@@ -58,7 +61,6 @@ public class MainActivity extends BaseActivity {
 
     @Bind(R.id.swipe)
     public  SwipeRefreshLayout swipe;
-
 
     private PageTask pageTask;
 
@@ -139,12 +141,7 @@ public class MainActivity extends BaseActivity {
         pageTask = new PageTask();
         pageTask.getPageSubject().onNext(1);
 
-        showAni = AnimationUtils.loadAnimation(this,R.anim.slide_in_from_top);
-        hideAni = AnimationUtils.loadAnimation(this,R.anim.slide_out_to_top);
-        right_in = AnimationUtils.loadAnimation(this,R.anim.right_slide_in);
-        right_out = AnimationUtils.loadAnimation(this,R.anim.right_slide_out);
-        rotate_0 =  AnimationUtils.loadAnimation(this,R.anim.rotate_0_90);
-        rotate_90 =  AnimationUtils.loadAnimation(this,R.anim.rotate_90_0);
+        loadAnimation();
 
         adapter = new EveryDayAdapter(datalist);
         mainlist.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -155,6 +152,15 @@ public class MainActivity extends BaseActivity {
 
 
 
+    }
+
+    private void loadAnimation() {
+        showAni = AnimationUtils.loadAnimation(this, R.anim.slide_in_from_top);
+        hideAni = AnimationUtils.loadAnimation(this,R.anim.slide_out_to_top);
+        right_in = AnimationUtils.loadAnimation(this,R.anim.right_slide_in);
+        right_out = AnimationUtils.loadAnimation(this,R.anim.right_slide_out);
+        rotate_0 =  AnimationUtils.loadAnimation(this,R.anim.rotate_0_90);
+        rotate_90 =  AnimationUtils.loadAnimation(this,R.anim.rotate_90_0);
     }
 
     @Override
