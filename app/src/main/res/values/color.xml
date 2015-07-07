@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="text_color_dark_secondary">#7f8c8d</color>
-
+    <color name="text_color_primeray">#222222</color>
     <color name="tab_text_color_normal">#ecf0f1</color>
     <color name="cover_tab_text_color_normal">#807f8c8d</color>
     <color name="transplant">#00000000</color>
     <color name="white">#ffffff</color>
 </resources>
+

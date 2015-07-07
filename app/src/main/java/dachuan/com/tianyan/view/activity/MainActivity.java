@@ -5,6 +5,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -12,6 +16,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
+import butterknife.OnClick;
 import dachuan.com.tianyan.R;
 import dachuan.com.tianyan.api.Client;
 import dachuan.com.tianyan.model.Cache;
@@ -20,8 +25,6 @@ import dachuan.com.tianyan.task.PageTask;
 import dachuan.com.tianyan.view.adapter.EveryDayAdapter;
 import dachuan.com.tianyan.view.base.BaseActivity;
 import rx.Observable;
-import rx.Scheduler;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -34,12 +37,22 @@ public class MainActivity extends BaseActivity {
 
     @Bind(R.id.title)
     TextView title;
+    @Bind(R.id.mine)
+    View mine;
+    @Bind(R.id.setting)
+    View setting;
+
+    @Bind(R.id.icon)
+    ImageView icon;
+    @Bind(R.id.eye)
+    ImageView eye;
 
     @Bind(R.id.main_list)
     public  RecyclerView mainlist;
 
     @Bind(R.id.swipe)
     public  SwipeRefreshLayout swipe;
+
 
     private PageTask pageTask;
 
@@ -49,6 +62,30 @@ public class MainActivity extends BaseActivity {
 
     private List<String> datalist = new ArrayList<String>();
 
+    Animation showAni,hideAni,right_in,right_out,rotate_90,rotate_0;
+
+    @OnClick(R.id.icon)
+    public void showMy(){
+        animation_icon();
+    }
+
+    private void animation_icon() {
+        if(mine.getVisibility() == View.VISIBLE){
+            mine.setVisibility(View.INVISIBLE);
+            mine.startAnimation(hideAni);
+            icon.startAnimation(rotate_90);
+
+        }else{
+            mine.setVisibility(View.VISIBLE);
+            mine.startAnimation(showAni);
+            icon.startAnimation(rotate_0);
+        }
+    }
+
+    @OnClick(R.id.up)
+    public void show(){
+        animation_icon();
+    }
 
 
     @Override
@@ -60,12 +97,22 @@ public class MainActivity extends BaseActivity {
         pageTask = new PageTask();
         pageTask.getPageSubject().onNext(1);
 
+        showAni = AnimationUtils.loadAnimation(this,R.anim.slide_in_from_top);
+        hideAni = AnimationUtils.loadAnimation(this,R.anim.slide_out_to_top);
+        right_in = AnimationUtils.loadAnimation(this,R.anim.right_slide_in);
+        right_out = AnimationUtils.loadAnimation(this,R.anim.right_slide_out);
+        rotate_0 =  AnimationUtils.loadAnimation(this,R.anim.rotate_0_90);
+        rotate_90 =  AnimationUtils.loadAnimation(this,R.anim.rotate_90_0);
+
         adapter = new EveryDayAdapter(datalist);
         mainlist.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mainlist.setAdapter(adapter);
         initListener();
         initData();
         getData();
+
+
+
     }
 
     @Override

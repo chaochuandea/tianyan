@@ -83,10 +83,7 @@ public class StartActivity extends BaseActivity {
                     textAnimater,
                     ObjectAnimator.ofFloat(app_name_en, "translationY", 0, -200)
                     );
-
             set.setDuration(1000).start();
-
-
         });
     }
 }
