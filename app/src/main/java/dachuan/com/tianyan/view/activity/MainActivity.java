@@ -24,6 +24,7 @@ import dachuan.com.tianyan.task.CacheTask;
 import dachuan.com.tianyan.task.PageTask;
 import dachuan.com.tianyan.view.adapter.EveryDayAdapter;
 import dachuan.com.tianyan.view.base.BaseActivity;
+import dachuan.com.tianyan.view.widget.BlurView;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -32,6 +33,10 @@ import timber.log.Timber;
 public class MainActivity extends BaseActivity {
     private static String INTENT_TOKEN = "intent_token";
     private static String CACHE_KEY = "main_activity_data";
+
+    @Bind(R.id.blurview)
+    BlurView blurview;
+
     @Bind(R.id.tool_bar)
      Toolbar toolbar;
 
@@ -151,7 +156,7 @@ public class MainActivity extends BaseActivity {
         getData();
 
 
-
+        blurview.setTarget(mainlist).refresh();
     }
 
     private void loadAnimation() {
