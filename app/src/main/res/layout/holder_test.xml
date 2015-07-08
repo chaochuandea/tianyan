@@ -1,53 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:auto="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="300dp"
-    android:orientation="horizontal"
-    >
+ <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:auto="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/cover"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:fadeDuration="300"
-        auto:placeholderImageScaleType="centerCrop"
-        auto:placeholderImage="@mipmap/img_start"
-        />
+        android:orientation="horizontal"
+        >
 
-    <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/cover_bg"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        auto:placeholderImageScaleType="centerCrop"
-        auto:placeholderImage="@mipmap/img_start"
-        />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/name"
-            android:text="你他买de"
-            android:textSize="20sp"
-            android:textColor="@android:color/white"
-           fontPath="fonts/Roboto-Bold.ttf"/>
-        <dachuan.com.tianyan.view.widget.LodingIcon
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tag_and_time"
-            android:textColor="@android:color/white"
-            fontPath="fonts/Roboto-ThinItalic.ttf"
-            android:layout_gravity="center"
-            android:text="s"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/rotate"
-            android:src="@drawable/rotate"/>
-    </LinearLayout>
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/cover"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:fadeDuration="300"
+            auto:placeholderImageScaleType="centerCrop"
+            auto:placeholderImage="@mipmap/img_start"
+            />
 
-</RelativeLayout>
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/cover_bg"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            auto:placeholderImageScaleType="centerCrop"
+            auto:placeholderImage="@mipmap/img_start"
+            />
+        <FrameLayout
+            android:id="@+id/view_cover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/primary_dark_material_dark"
+            android:alpha="0.5"/>
+        <LinearLayout
+            android:id="@+id/text_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/name"
+                android:text="你他买de"
+                android:textSize="20sp"
+                android:textColor="@android:color/white"
+               fontPath="fonts/Roboto-Bold.ttf"/>
+            <dachuan.com.tianyan.view.widget.LodingIcon
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tag_and_time"
+                android:textColor="@android:color/white"
+                fontPath="fonts/Roboto-ThinItalic.ttf"
+                android:layout_gravity="center"
+                android:text="s"/>
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:id="@+id/rotate"-->
+                <!--android:src="@drawable/rotate"/>-->
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+
+</FrameLayout>
