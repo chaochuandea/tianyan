@@ -29,6 +29,8 @@ import java.util.concurrent.TimeUnit;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import dachuan.com.tianyan.R;
+import dachuan.com.tianyan.util.Blur;
+import dachuan.com.tianyan.view.widget.BlurView;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -60,7 +62,6 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
-        viewHolder.rootView.setLongClickable(true);
         viewHolder.rootView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -77,18 +78,16 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
                     case MotionEvent.ACTION_MOVE:
                         float dx = firstX - event.getX();
                         float dy = firstY - event.getY();
-                        if(dx == dy) break;
+                        if (dx == dy) break;
                         else if (dx > dy) isFlipUp = false;
                         else if (dx < dy) isFlipUp = true;
-                        if(isFlipUp)
-                        {
+                        if (isFlipUp) {
                             animatorSet.playTogether(ObjectAnimator.ofFloat(viewHolder.textLayout, "alpha", 0.0f, 1.0f)
                                     .setDuration(800), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.0f, 0.5f)
                                     .setDuration(800));
                             animatorSet.start();
                             return false;
-                        }
-                        else break;
+                        } else break;
                     case MotionEvent.ACTION_UP:
                     case MotionEvent.ACTION_OUTSIDE:
                     case MotionEvent.ACTION_CANCEL:
@@ -102,19 +101,8 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
             }
         });
         viewHolder.name.setText("Hello , " + list.get(position));
-//        LayerDrawable layerDrawable = (LayerDrawable) viewHolder.rotate.getDrawable();
-//
-//        RotateDrawable rottate = (RotateDrawable) layerDrawable.getDrawable(1);
-//        ValueAnimator animator = ObjectAnimator.ofInt(0, 10000, 0);
-//        animator.setInterpolator(new AccelerateDecelerateInterpolator());
-//        animator.addUpdateListener(animation -> {
-//            int level = (int) (10000 * animation.getAnimatedFraction());
-//            rottate.setLevel(level);
-//            Timber.d("ssss", level + "");
-//        });
-//        animator.setDuration(1000);
-//        animator.setRepeatCount(ValueAnimator.INFINITE);
-//        animator.start();
+        viewHolder.coverView.setRadius(1).setScalFactor(100).setTarget(viewHolder.bgImg).refresh();
+
 
     }
 
@@ -133,8 +121,10 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
         @Bind(R.id.text_layout)
         View textLayout;
         @Bind(R.id.view_cover)
-        View coverView;
+        BlurView coverView;
 
+        @Bind(R.id.cover_bg)
+        SimpleDraweeView bgImg;
         View rootView;
 
         public ViewHolder(View itemView) {
