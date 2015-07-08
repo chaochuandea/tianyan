@@ -34,8 +34,6 @@ public class MainActivity extends BaseActivity {
     private static String INTENT_TOKEN = "intent_token";
     private static String CACHE_KEY = "main_activity_data";
 
-    @Bind(R.id.blurview)
-    BlurView blurview;
 
     @Bind(R.id.tool_bar)
      Toolbar toolbar;
@@ -155,8 +153,6 @@ public class MainActivity extends BaseActivity {
         initData();
         getData();
 
-
-        blurview.setTarget(mainlist).refresh();
     }
 
     private void loadAnimation() {

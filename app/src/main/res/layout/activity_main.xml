@@ -228,10 +228,6 @@
             </ScrollView>
 
         </RelativeLayout>
-        <dachuan.com.tianyan.view.widget.BlurView
-            android:layout_width="match_parent"
-            android:id="@+id/blurview"
-            android:layout_height="match_parent" />
     </RelativeLayout>
 
 </RelativeLayout>
