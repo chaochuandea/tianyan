@@ -3,6 +3,7 @@ package dachuan.com.tianyan.view.widget;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
@@ -51,6 +52,15 @@ public class BlurView extends View{
 
 
 
+    private static Bitmap rotateBitmap(Bitmap source, int angle)
+    {
+        if (angle>0){
+            Matrix matrix = new Matrix();
+            matrix.postRotate(angle);
+            return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(), matrix, true);
+        }
+       return source;
+    }
     private void setUp(){
         subject.map(integer1 -> {
 
@@ -62,9 +72,9 @@ public class BlurView extends View{
             canvas.scale(1 / scaleFactor, 1 / scaleFactor);
             Paint paint = new Paint();
             paint.setFlags(Paint.FILTER_BITMAP_FLAG);
-            canvas.drawBitmap(integer1, 0, 0, paint);
+            canvas.drawBitmap(integer1,0,0, paint);
 
-            return   overlay = Blur.apply(getContext(),overlay,radius);
+            return  rotateBitmap(Blur.apply(getContext(),overlay,radius),degree) ;
 
         }).subscribe(integer -> {
             int sdk = android.os.Build.VERSION.SDK_INT;
@@ -73,6 +83,7 @@ public class BlurView extends View{
             } else {
                 setBackground(new BitmapDrawable(getResources(), integer));
             }
+            invalidate();
         });
     }
     private View view;
@@ -81,6 +92,12 @@ public class BlurView extends View{
        return this;
     }
     private boolean sync = false;
+
+    private int degree = 0;
+    public BlurView rotate(int degree){
+        this.degree = degree;
+        return this;
+    }
     public BlurView setSync(boolean sync) {
         this.sync = sync;
         return this;

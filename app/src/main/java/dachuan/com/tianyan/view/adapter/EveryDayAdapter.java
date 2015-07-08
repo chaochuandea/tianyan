@@ -47,9 +47,10 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
     private float firstY;
     private boolean isFlipUp;
     private List<String> list;
+    private View detailView;
 
-    public EveryDayAdapter(List<String> list) {
-
+    public EveryDayAdapter(List<String> list,View detailView) {
+        this.detailView = detailView;
         this.list = list;
     }
 
@@ -62,6 +63,12 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
+        viewHolder.rootView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                detailView.setVisibility(View.VISIBLE);
+            }
+        });
         viewHolder.rootView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -74,7 +81,7 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
                                 .setDuration(800), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.5f, 0.0f)
                                 .setDuration(800));
                         animatorSet.start();
-                        return true;
+                        return false;
                     case MotionEvent.ACTION_MOVE:
                         float dx = firstX - event.getX();
                         float dy = firstY - event.getY();

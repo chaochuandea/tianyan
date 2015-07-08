@@ -1,15 +1,24 @@
 package dachuan.com.tianyan.view.activity;
 
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.ToxicBakery.viewpager.transforms.ABaseTransformer;
+import com.ToxicBakery.viewpager.transforms.AccordionTransformer;
+import com.ToxicBakery.viewpager.transforms.BackgroundToForegroundTransformer;
+import com.ToxicBakery.viewpager.transforms.FlipHorizontalTransformer;
+import com.astuetz.PagerSlidingTabStrip;
+import com.nineoldandroids.view.ViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +31,7 @@ import dachuan.com.tianyan.api.Client;
 import dachuan.com.tianyan.model.Cache;
 import dachuan.com.tianyan.task.CacheTask;
 import dachuan.com.tianyan.task.PageTask;
+import dachuan.com.tianyan.view.adapter.DetailViewPagerAdapter;
 import dachuan.com.tianyan.view.adapter.EveryDayAdapter;
 import dachuan.com.tianyan.view.base.BaseActivity;
 import dachuan.com.tianyan.view.widget.BlurView;
@@ -33,7 +43,14 @@ import timber.log.Timber;
 public class MainActivity extends BaseActivity {
     private static String INTENT_TOKEN = "intent_token";
     private static String CACHE_KEY = "main_activity_data";
+    @Bind(R.id.viewpager)
+    ViewPager viewpager;
 
+    @Bind(R.id.detail_view)
+    View detail_view;
+
+    @Bind(R.id.tabs)
+    PagerSlidingTabStrip tabs;
 
     @Bind(R.id.tool_bar)
      Toolbar toolbar;
@@ -146,13 +163,38 @@ public class MainActivity extends BaseActivity {
 
         loadAnimation();
 
-        adapter = new EveryDayAdapter(datalist);
+        adapter = new EveryDayAdapter(datalist,detail_view);
         mainlist.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mainlist.setAdapter(adapter);
         initListener();
         initData();
         getData();
 
+        viewpager.setAdapter(new DetailViewPagerAdapter(getSupportFragmentManager()));
+        tabs.setViewPager(viewpager);
+        viewpager.setPageTransformer(true,new MyTransformer());
+
+
+    }
+
+    class MyTransformer extends ABaseTransformer{
+
+        @Override
+        protected boolean isPagingEnabled() {
+            return false;
+        }
+
+        @Override
+        protected void onTransform(View view, float v) {
+
+            View  cover = view.findViewById(R.id.cover);
+            Log.d("tag", v + "");
+            if (v<=0){
+                ViewHelper.setTranslationX(cover,view.getWidth()*v);
+            }else if (v>0){
+                ViewHelper.setTranslationX(cover,-view.getWidth()*(0.8f-0.2f*v-0.8f));
+            };
+        }
     }
 
     private void loadAnimation() {

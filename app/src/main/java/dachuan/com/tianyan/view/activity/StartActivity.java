@@ -60,7 +60,7 @@ public class StartActivity extends BaseActivity {
 
     @Override
     public void init(Bundle savedInstanceState) {
-        Observable.timer(5000, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe(aLong -> {
+        Observable.timer(1000, TimeUnit.MILLISECONDS).observeOn(AndroidSchedulers.mainThread()).subscribe(aLong -> {
             AnimatorSet set = new AnimatorSet();
             bg.setVisibility(View.VISIBLE);
             eye.setImageResource(R.mipmap.ic_launcher);
