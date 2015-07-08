@@ -187,13 +187,26 @@ public class MainActivity extends BaseActivity {
         @Override
         protected void onTransform(View view, float v) {
 
+
             View  cover = view.findViewById(R.id.cover);
-            Log.d("tag", v + "");
+            View blurringview = view.findViewById(R.id.blurringview);
+
             if (v<=0){
-                ViewHelper.setTranslationX(cover,view.getWidth()*v);
+                ViewHelper.setTranslationX(cover, view.getWidth() * v);
+                ViewHelper.setAlpha(blurringview, 1-Math.abs(v));
+                if (v==0) ViewHelper.setAlpha(blurringview, 1);
+
+
             }else if (v>0){
-                ViewHelper.setTranslationX(cover,-view.getWidth()*(0.8f-0.2f*v-0.8f));
+                ViewHelper.setTranslationX(cover, -view.getWidth() * (0.8f - 0.2f * v - 0.8f));
+
+                 ViewHelper.setAlpha(blurringview, 1);
             };
+
+
+
+
+
         }
     }
 

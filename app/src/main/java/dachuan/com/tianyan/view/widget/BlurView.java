@@ -111,12 +111,17 @@ public class BlurView extends View{
         view.getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
             @Override
             public boolean onPreDraw() {
-                if (!sync){
-                    view.getViewTreeObserver().removeOnPreDrawListener(this);
+                try {
+                    if (!sync){
+                        view.getViewTreeObserver().removeOnPreDrawListener(this);
+                    }
+
+                    view.buildDrawingCache();
+                    blur(view.getDrawingCache());
+                }catch (IllegalArgumentException e){
+                    e.printStackTrace();
                 }
 
-                view.buildDrawingCache();
-                blur(view.getDrawingCache());
                 return true;
             }
         });
