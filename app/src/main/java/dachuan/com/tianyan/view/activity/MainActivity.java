@@ -329,4 +329,13 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+
+    @Override
+    public void onBackPressed() {
+        if (detail_view.getVisibility() == View.VISIBLE){
+            detail_view.setVisibility(View.INVISIBLE);
+            return;
+        }
+        super.onBackPressed();
+    }
 }

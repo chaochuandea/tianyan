@@ -108,7 +108,7 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
             }
         });
         viewHolder.name.setText("Hello , " + list.get(position));
-        viewHolder.coverView.setRadius(1).setScalFactor(100).setTarget(viewHolder.bgImg).refresh();
+//        viewHolder.coverView.setRadius(1).setScalFactor(100).setTarget(viewHolder.bgImg).refresh();
 
 
     }

@@ -57,7 +57,7 @@ public class MovieDetailFragment extends BaseFragment {
         Uri  uri = Uri.parse(pictures.get(new Random().nextInt(3)));
         DraweeController controller = Fresco.newDraweeControllerBuilder().setControllerListener(listener).setUri(uri).build();
         cover.setController(controller);
-        blurringview.setRadius(25).setImageUri(uri);
+        blurringview.setImageUri(uri);
 
         startAnimation();
     }
