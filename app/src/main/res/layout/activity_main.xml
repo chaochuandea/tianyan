@@ -39,6 +39,7 @@
             auto:pstsUnderlineColor="@color/transplant"
             auto:pstsUnderlineHeight="0.5dp"
             auto:pstsIndicatorHeight="1dp"
+            auto:pstsShouldExpand = "true"
             android:layout_width="match_parent"
             android:layout_height="32dp"/>
     </RelativeLayout>

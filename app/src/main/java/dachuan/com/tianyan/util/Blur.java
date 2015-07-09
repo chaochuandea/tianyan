@@ -22,20 +22,19 @@ public class Blur {
 	@SuppressLint("NewApi")
 	public static Bitmap apply(Context context, Bitmap sentBitmap, int radius) {
 
-        Bitmap bitmap = Bitmap.createScaledBitmap(sentBitmap, sentBitmap.getWidth()/2, sentBitmap.getHeight()/2, false);
-
+//
 		if (VERSION.SDK_INT > 16) {
 			if (rs== null) rs = RenderScript.create(context);
-			final Allocation input = Allocation.createFromBitmap(rs, bitmap, Allocation.MipmapControl.MIPMAP_NONE,
+			final Allocation input = Allocation.createFromBitmap(rs, sentBitmap, Allocation.MipmapControl.MIPMAP_NONE,
 					Allocation.USAGE_SCRIPT);
 			final Allocation output = Allocation.createTyped(rs, input.getType());
 			final ScriptIntrinsicBlur script = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
 			script.setRadius(radius);
 			script.setInput(input);
 			script.forEach(output);
-			output.copyTo(bitmap);
+			output.copyTo(sentBitmap);
 
-			return bitmap;
+			return sentBitmap;
 		}
 
 		// Stack Blur v1.0 from
@@ -70,11 +69,11 @@ public class Blur {
 			return (null);
 		}
 
-		int w = bitmap.getWidth();
-		int h = bitmap.getHeight();
+		int w = sentBitmap.getWidth();
+		int h = sentBitmap.getHeight();
 
 		int[] pix = new int[w * h];
-		bitmap.getPixels(pix, 0, w, 0, 0, w, h);
+		sentBitmap.getPixels(pix, 0, w, 0, 0, w, h);
 
 		int wm = w - 1;
 		int hm = h - 1;
@@ -259,7 +258,7 @@ public class Blur {
 			}
 		}
 
-		bitmap.setPixels(pix, 0, w, 0, 0, w, h);
-		return (bitmap);
+		sentBitmap.setPixels(pix, 0, w, 0, 0, w, h);
+		return (sentBitmap);
 	}
 }
