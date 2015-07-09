@@ -84,7 +84,6 @@ public class EveryDayFragment extends BaseFragment {
 
 
 
-
         viewpager.setAdapter(new DetailViewPagerAdapter(getChildFragmentManager(),fragments));
         tabs.setViewPager(viewpager);
         viewpager.setPageTransformer(true, new MyTransformer());
@@ -192,6 +191,7 @@ public class EveryDayFragment extends BaseFragment {
 
     //接收page，开始请求数据,然后cache,然后响应数据
     private void initData(){
+
         pageTask.getPageSubject().subscribe(integer -> {
             subscribe(Client.getApiService().getUser(token ,integer).map(user1 -> {
                 CacheTask.getCacheSubject().onNext(new Cache(CACHE_KEY,user1));

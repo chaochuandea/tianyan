@@ -81,7 +81,7 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
                                 .setDuration(800), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.5f, 0.0f)
                                 .setDuration(800));
                         animatorSet.start();
-                        return false;
+                        return true;
                     case MotionEvent.ACTION_MOVE:
                         float dx = firstX - event.getX();
                         float dy = firstY - event.getY();
@@ -95,7 +95,7 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
                             animatorSet.start();
                             return false;
                         } else break;
-                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_UP: viewHolder.rootView.performClick();
                     case MotionEvent.ACTION_OUTSIDE:
                     case MotionEvent.ACTION_CANCEL:
                         animatorSet.playTogether(ObjectAnimator.ofFloat(viewHolder.textLayout, "alpha", 0.0f, 1.0f)
