@@ -20,4 +20,6 @@
     <string name="tiaokuan">用户协议</string>
     <string name="movie_tips">视频功能说明</string>
     <string name="jubao">版权举报</string>
+    <string name="bottom_1">每日精选</string>
+    <string name="bottom_2">往期分类</string>
 </resources>
