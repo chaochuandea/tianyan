@@ -57,6 +57,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     TextView button_2;
 
 
+    @Bind(R.id.viewpager)
+    ViewPager viewpager;
+
+    @Bind(R.id.detail_view)
+    View detail_view;
+
+    @Bind(R.id.tabs)
+    PagerSlidingTabStrip tabs;
+
     @Bind(R.id.tool_bar)
      Toolbar toolbar;
 
@@ -81,7 +90,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     @Bind(R.id.eye)
     ImageView eye;
 
-
+    List<Fragment> fragments = new ArrayList<>();
 
     Animation showAni,hideAni,right_in,right_out,rotate_90,rotate_0;
 
@@ -187,12 +196,122 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         loadAnimation();
 
         adapter = new MainViewPagerAdapter(getSupportFragmentManager());
+        adapter.getEveryDayFragment().setDetail_view(detail_view);
         mainViewPager.setAdapter(adapter);
         bottombar.findViewById(R.id.text1).setOnClickListener(this);
         bottombar.findViewById(R.id.text2).setOnClickListener(this);
         changeButtonState();
-    }
 
+        initFragment();
+
+        viewpager.setAdapter(new DetailViewPagerAdapter(getSupportFragmentManager(),fragments));
+        tabs.setViewPager(viewpager);
+        viewpager.setPageTransformer(true, new MyTransformer());
+        viewpager.setOffscreenPageLimit(5);
+        viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                for (int i = 0; i < tabs.getChildCount(); i++) {
+                    if (tabs.getChildAt(i) instanceof LinearLayout) {
+                        ViewGroup con = (ViewGroup) tabs.getChildAt(i);
+                        for (int j = 0; j < con.getChildCount(); j++) {
+                            if (con.getChildAt(j) instanceof TextView) {
+                                if (j == position) {
+                                    ViewHelper.setAlpha(con.getChildAt(j), 1);
+                                    TextView tv = (TextView) con.getChildAt(j);
+                                    tv.setTextColor(getResources().getColor(R.color.white));
+                                    tv.setText(Html.fromHtml("" + (position + 1) + " - " + 5));
+                                    ViewHelper.setTranslationX(con.getChildAt(j), con.getChildAt(j).getWidth() * positionOffset);
+                                } else {
+                                    ViewHelper.setAlpha(con.getChildAt(j), 0);
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                for (int i = 0; i < fragments.size(); i++) {
+                    if (i == position) {
+                        ((MovieDetailFragment) fragments.get(i)).startAnimation();
+                    } else {
+                        ((MovieDetailFragment) fragments.get(i)).hideTextView();
+                    }
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+    }
+    private void initFragment() {
+        for (int i = 0 ;i<5;i++){
+            fragments.add(new MovieDetailFragment());
+        }
+
+    }
+    @Override
+    public void onBackPressed() {
+        if (detail_view.getVisibility() == View.VISIBLE){
+            detail_view.setVisibility(View.INVISIBLE);
+            return;
+        }
+        super.onBackPressed();
+    }
+    class MyTransformer extends ABaseTransformer {
+
+        @Override
+        protected boolean isPagingEnabled() {
+            return false;
+        }
+
+        @Override
+        protected void onTransform(View view, float v) {
+
+
+            View  cover = view.findViewById(R.id.cover);
+            View blurringview = view.findViewById(R.id.blurringview);
+            View text_con = view.findViewById(R.id.text);
+            if (v<=0&&v>=-1){
+                ViewHelper.setTranslationX(cover, view.getWidth() * v);
+                ViewHelper.setAlpha(blurringview, 1 - Math.abs(v));
+
+                if (v==0) {
+                    ViewHelper.setAlpha(blurringview, 1);
+                };
+
+
+            }else if (v>0&&v<=1){
+                ViewHelper.setTranslationX(cover, -view.getWidth() * (0.8f - 0.2f * v - 0.8f));
+
+                ViewHelper.setAlpha(blurringview, 1);
+            };
+
+
+            if(v <= -1.0F || v >= 1.0F) {
+                text_con.setAlpha(0.0F);
+            } else if( v == 0.0F ) {
+                text_con.setAlpha(1.0F);
+            } else {
+                // position is between -1.0F & 0.0F OR 0.0F & 1.0F
+                text_con.setAlpha(1.0F - Math.abs(v));
+            }
+//            if (v <= 0f) {
+//                ViewHelper.setAlpha(text_con, 1-Math.abs(v));
+//                if (v == 0)ViewHelper.setAlpha(text_con, 1);
+//            } else if (v <= 1f) {
+//                ViewHelper.setAlpha(text_con, 0);
+//                ViewHelper.setAlpha(text_con, Math.abs(v));
+//            }
+
+        }
+    }
     private void loadAnimation() {
         showAni = AnimationUtils.loadAnimation(this, R.anim.slide_in_from_top);
         hideAni = AnimationUtils.loadAnimation(this,R.anim.slide_out_to_top);

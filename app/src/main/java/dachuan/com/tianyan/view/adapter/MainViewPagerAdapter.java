@@ -11,6 +11,11 @@ import dachuan.com.tianyan.view.fragment.SortFragment;
  * Created by linsj on 15-7-9.
  */
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
+    private EveryDayFragment everyDayFragment = new EveryDayFragment();
+
+    public EveryDayFragment getEveryDayFragment() {
+        return everyDayFragment;
+    }
 
     public MainViewPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -20,7 +25,7 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch(position)
         {
-            case 0 : return new EveryDayFragment();
+            case 0 : return everyDayFragment;
             case 1 : return new SortFragment();
             default: return null;
         }
