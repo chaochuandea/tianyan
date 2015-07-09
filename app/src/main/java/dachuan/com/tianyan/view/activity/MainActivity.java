@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -33,24 +34,28 @@ import dachuan.com.tianyan.task.CacheTask;
 import dachuan.com.tianyan.task.PageTask;
 import dachuan.com.tianyan.view.adapter.DetailViewPagerAdapter;
 import dachuan.com.tianyan.view.adapter.EveryDayAdapter;
+import dachuan.com.tianyan.view.adapter.MainViewPagerAdapter;
 import dachuan.com.tianyan.view.base.BaseActivity;
 import dachuan.com.tianyan.view.fragment.MovieDetailFragment;
+import dachuan.com.tianyan.view.widget.StaticViewpager;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 
-public class MainActivity extends BaseActivity {
-    private static String INTENT_TOKEN = "intent_token";
-    private static String CACHE_KEY = "main_activity_data";
-    @Bind(R.id.viewpager)
-    ViewPager viewpager;
+public class MainActivity extends BaseActivity implements View.OnClickListener{
+    public static String INTENT_TOKEN = "intent_token";
+    @Bind(R.id.main_viewpager)
+    public StaticViewpager mainViewPager;
+    private MainViewPagerAdapter adapter;
+    @Bind(R.id.bottombar)
+    public  View bottombar;
+    @Bind(R.id.text1)
+    TextView button_1;
+    @Bind(R.id.text2)
+    TextView button_2;
 
-    @Bind(R.id.detail_view)
-    View detail_view;
-
-    @Bind(R.id.tabs)
-    PagerSlidingTabStrip tabs;
 
     @Bind(R.id.tool_bar)
      Toolbar toolbar;
@@ -76,25 +81,13 @@ public class MainActivity extends BaseActivity {
     @Bind(R.id.eye)
     ImageView eye;
 
-    @Bind(R.id.main_list)
-    public  RecyclerView mainlist;
 
-    @Bind(R.id.swipe)
-    public  SwipeRefreshLayout swipe;
-
-    private PageTask pageTask;
-
-    private String token;
-
-    private EveryDayAdapter adapter;
-
-    private List<String> datalist = new ArrayList<String>();
 
     Animation showAni,hideAni,right_in,right_out,rotate_90,rotate_0;
 
     private boolean show_setting = false;
 
-    List<Fragment> fragments = new ArrayList<>();
+
 
     @OnClick(R.id.icon)
     public void showMy(){
@@ -152,130 +145,52 @@ public class MainActivity extends BaseActivity {
     public void show(){
         animation_icon();
     }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId())
+        {
+            case R.id.text1:
+                mainViewPager.setCurrentItem(0,false);
+                changeButtonState();
+                break;
+            case R.id.text2:
+                mainViewPager.setCurrentItem(1,false);
+                changeButtonState();
+                break;
+        }
+    }
 
+
+    private void changeButtonState(){
+        Observable.just(mainViewPager.getCurrentItem()).observeOn(AndroidSchedulers.mainThread()).subscribe(item -> {
+            Log.i("switch", "what the fuck is wrong?");
+            switch (item)
+            {
+                case 0 :
+                    button_1.setTextColor(getResources().getColor(R.color.text_activated));
+                    button_2.setTextColor(getResources().getColor(R.color.text_normal));
+                    break;
+                case 1:
+                    button_2.setTextColor(getResources().getColor(R.color.text_activated));
+                    button_1.setTextColor(getResources().getColor(R.color.text_normal));
+                    break;
+            }
+        });
+
+    }
 
     @Override
     public void init(Bundle savedInstanceState) {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         title.setText("tianyan");
-        token = getIntent().getStringExtra(MainActivity.INTENT_TOKEN);
-        pageTask = new PageTask();
-        pageTask.getPageSubject().onNext(1);
-
         loadAnimation();
 
-        adapter = new EveryDayAdapter(datalist,detail_view);
-        mainlist.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        mainlist.setAdapter(adapter);
-        initListener();
-        initData();
-        getData();
-
-        initFragment();
-
-        viewpager.setAdapter(new DetailViewPagerAdapter(getSupportFragmentManager(),fragments));
-        tabs.setViewPager(viewpager);
-        viewpager.setPageTransformer(true, new MyTransformer());
-        viewpager.setOffscreenPageLimit(5);
-       viewpager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-           @Override
-           public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-               for (int i=0;i<tabs.getChildCount();i++){
-                   if(tabs.getChildAt(i) instanceof LinearLayout){
-                       ViewGroup con = (ViewGroup) tabs.getChildAt(i);
-                       for (int j = 0;j<con.getChildCount();j++){
-                           if (con.getChildAt(j) instanceof TextView){
-                               if (j == position){
-                                   ViewHelper.setAlpha(con.getChildAt(j), 1);
-                                   TextView tv = (TextView) con.getChildAt(j);
-                                   tv.setTextColor(getResources().getColor(R.color.white));
-                                   tv.setText(Html.fromHtml(""+(position+1)+" - "+5));
-                                   ViewHelper.setTranslationX(con.getChildAt(j),con.getChildAt(j).getWidth()*positionOffset);
-                               }else {
-                                   ViewHelper.setAlpha(con.getChildAt(j),0);
-                               }
-                           }
-                       }
-
-
-                   }
-               }
-           }
-
-           @Override
-           public void onPageSelected(int position) {
-                for (int i = 0;i<fragments.size();i++){
-                    if (i==position){
-                        ((MovieDetailFragment)fragments.get(i)).startAnimation();
-                    }else{
-                        ((MovieDetailFragment)fragments.get(i)).hideTextView();
-                    }
-                }
-           }
-
-           @Override
-           public void onPageScrollStateChanged(int state) {
-
-           }
-       });
-
-    }
-
-    private void initFragment() {
-        for (int i = 0 ;i<5;i++){
-            fragments.add(new MovieDetailFragment());
-        }
-
-    }
-
-    class MyTransformer extends ABaseTransformer{
-
-        @Override
-        protected boolean isPagingEnabled() {
-            return false;
-        }
-
-        @Override
-        protected void onTransform(View view, float v) {
-
-
-            View  cover = view.findViewById(R.id.cover);
-            View blurringview = view.findViewById(R.id.blurringview);
-            View text_con = view.findViewById(R.id.text);
-            if (v<=0&&v>=-1){
-                ViewHelper.setTranslationX(cover, view.getWidth() * v);
-                ViewHelper.setAlpha(blurringview, 1 - Math.abs(v));
-
-                if (v==0) {
-                    ViewHelper.setAlpha(blurringview, 1);
-                };
-
-
-            }else if (v>0&&v<=1){
-                ViewHelper.setTranslationX(cover, -view.getWidth() * (0.8f - 0.2f * v - 0.8f));
-
-                 ViewHelper.setAlpha(blurringview, 1);
-            };
-
-
-            if(v <= -1.0F || v >= 1.0F) {
-                text_con.setAlpha(0.0F);
-            } else if( v == 0.0F ) {
-                text_con.setAlpha(1.0F);
-            } else {
-                // position is between -1.0F & 0.0F OR 0.0F & 1.0F
-                text_con.setAlpha(1.0F - Math.abs(v));
-            }
-//            if (v <= 0f) {
-//                ViewHelper.setAlpha(text_con, 1-Math.abs(v));
-//                if (v == 0)ViewHelper.setAlpha(text_con, 1);
-//            } else if (v <= 1f) {
-//                ViewHelper.setAlpha(text_con, 0);
-//                ViewHelper.setAlpha(text_con, Math.abs(v));
-//            }
-
-        }
+        adapter = new MainViewPagerAdapter(getSupportFragmentManager());
+        mainViewPager.setAdapter(adapter);
+        bottombar.findViewById(R.id.text1).setOnClickListener(this);
+        bottombar.findViewById(R.id.text2).setOnClickListener(this);
+        changeButtonState();
     }
 
     private void loadAnimation() {
@@ -287,55 +202,9 @@ public class MainActivity extends BaseActivity {
         rotate_90 =  AnimationUtils.loadAnimation(this,R.anim.rotate_90_0);
     }
 
+
     @Override
     public int getLayoutId() {
         return R.layout.activity_main;
-    }
-
-//接收page，开始请求数据,然后cache,然后响应数据
-    private void initData(){
-        pageTask.getPageSubject().subscribe(integer -> {
-                    subscribe(Client.getApiService().getUser(token ,integer).map(user1 -> {
-                        CacheTask.getCacheSubject().onNext(new Cache(CACHE_KEY,user1));
-                        return user1;
-                    }).map(users -> {
-                        return  users.get(1).getUser().getBytes();
-                    }), user -> Timber.d(user.toString()));
-        });
-        }
-
-    private void initListener(){
-        swipe.setOnRefreshListener(()->{
-            subscribe(Observable.timer(2, TimeUnit.SECONDS, Schedulers.io()), aLong1 -> {
-                addData(10);
-                adapter.notifyDataSetChanged();
-                swipe.setRefreshing(false);
-            });
-        });
-    }
-
-    private void getData() {
-        addData(10);
-        adapter.notifyDataSetChanged();
-        swipe.setRefreshing(false);
-
-    }
-
-    private void addData(int size)
-    {
-        for (int i = 0 ;i < size ;i ++ )
-        {
-            datalist.add("这是标题"  + i );
-        }
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        if (detail_view.getVisibility() == View.VISIBLE){
-            detail_view.setVisibility(View.INVISIBLE);
-            return;
-        }
-        super.onBackPressed();
     }
 }

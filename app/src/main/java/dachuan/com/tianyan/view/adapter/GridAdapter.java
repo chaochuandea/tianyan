@@ -94,7 +94,6 @@ public class GridAdapter extends RecyclerView.Adapter {
         });
 
         viewHolder.name.setText(list.get(position));
-        viewHolder.coverView.setRadius(1).setScalFactor(100).setTarget(viewHolder.bgImg).refresh();
 
 
     }

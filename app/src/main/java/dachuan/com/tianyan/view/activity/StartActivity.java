@@ -54,7 +54,7 @@ public class StartActivity extends BaseActivity {
 
     @OnClick(R.id.today)
     public void toMainActivity(){
-        startActivity(new Intent(this,ActivityFoReplace.class));
+        startActivity(new Intent(this,MainActivity.class));
         finish();
     }
 

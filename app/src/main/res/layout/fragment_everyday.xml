@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:auto="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent">
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/swipe"
+        >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/main_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/detail_view"
+        android:visibility="invisible"
+        android:layout_height="match_parent">
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:id="@+id/viewpager"
+            android:layout_height="match_parent"/>
+        <com.astuetz.PagerSlidingTabStrip
+            android:id="@+id/tabs"
+            android:layout_alignParentBottom="true"
+            auto:pstsIndicatorColor ="@color/white"
+            auto:pstsDividerColor="@color/transplant"
+            auto:pstsUnderlineColor="@color/transplant"
+            auto:pstsUnderlineHeight="0.5dp"
+            auto:pstsIndicatorHeight="1dp"
+            auto:pstsShouldExpand = "true"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"/>
+    </RelativeLayout>
+</LinearLayout>
