@@ -31,8 +31,8 @@ public class AnimateTextView extends TextView {
     public void animateText(String text){
         char[] arr = text.toCharArray();
         Handler handler = new Handler();
-        int duration = 1000;
-        int min = 10;
+        int duration = 800;
+        int min = 1;
         int max = 50;
         int delta = duration/arr.length;
        delta =  Math.max(min,Math.min(delta,max));

@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.ImageView;
@@ -47,6 +48,8 @@ public class StartActivity extends BaseActivity {
     TextView description;
     @Bind(R.id.description_en)
     TextView description_en;
+
+    private boolean click = false;
     @Override
     public int getLayoutId() {
         return R.layout.activity_start;
@@ -54,6 +57,7 @@ public class StartActivity extends BaseActivity {
 
     @OnClick(R.id.today)
     public void toMainActivity(){
+        click = true;
         startActivity(new Intent(this,MainActivity.class));
         finish();
     }
@@ -82,8 +86,16 @@ public class StartActivity extends BaseActivity {
                     ObjectAnimator.ofFloat(description_en, "alpha", 1f, 0),
                     textAnimater,
                     ObjectAnimator.ofFloat(app_name_en, "translationY", 0, -200)
-                    );
+            );
             set.setDuration(1000).start();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    if (!click)
+                    toMainActivity();
+                }
+            }, 2000);
+
         });
     }
 }
