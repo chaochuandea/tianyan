@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -27,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.OnClick;
+import dachuan.com.tianyan.AppContext;
 import dachuan.com.tianyan.R;
 import dachuan.com.tianyan.api.Client;
 import dachuan.com.tianyan.model.Cache;
@@ -36,6 +38,8 @@ import dachuan.com.tianyan.view.adapter.DetailViewPagerAdapter;
 import dachuan.com.tianyan.view.adapter.EveryDayAdapter;
 import dachuan.com.tianyan.view.adapter.MainViewPagerAdapter;
 import dachuan.com.tianyan.view.base.BaseActivity;
+import dachuan.com.tianyan.view.entity.OnLoadingFailedEntity;
+import dachuan.com.tianyan.view.entity.OnReLoadingEntity;
 import dachuan.com.tianyan.view.fragment.MovieDetailFragment;
 import dachuan.com.tianyan.view.widget.StaticViewpager;
 import rx.Observable;
@@ -89,6 +93,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     @Bind(R.id.eye)
     ImageView eye;
+
+    @Bind(R.id.loading_failed)
+    View loadingFailedView;
+
+    @Bind(R.id.cancel)
+    View cancelRetry;
 
     List<Fragment> fragments = new ArrayList<>();
 
@@ -190,6 +200,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void init(Bundle savedInstanceState) {
+        AppContext.instance().getBus().register(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         title.setText("tianyan");
@@ -204,7 +215,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
         initFragment();
 
-        viewpager.setAdapter(new DetailViewPagerAdapter(getSupportFragmentManager(),fragments));
+        viewpager.setAdapter(new DetailViewPagerAdapter(getSupportFragmentManager(), fragments));
         tabs.setViewPager(viewpager);
         viewpager.setPageTransformer(true, new MyTransformer());
         viewpager.setOffscreenPageLimit(5);
@@ -249,6 +260,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
             }
         });
+
+        loadingFailedView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                loadingFailedView.setVisibility(View.GONE);
+                AppContext.instance().getBus().post(new OnReLoadingEntity());
+                return true;
+            }
+        });
+
+        cancelRetry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadingFailedView.setVisibility(View.GONE);
+            }
+        });
     }
     private void initFragment() {
         for (int i = 0 ;i<5;i++){
@@ -263,7 +290,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             return;
         }
         super.onBackPressed();
+
+
     }
+
+    @Override
+    protected void onDestroy() {
+        AppContext.instance().getBus().unregister(this);
+        super.onDestroy();
+    }
+
     class MyTransformer extends ABaseTransformer {
 
         @Override
@@ -319,6 +355,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         right_out = AnimationUtils.loadAnimation(this,R.anim.right_slide_out);
         rotate_0 =  AnimationUtils.loadAnimation(this,R.anim.rotate_0_90);
         rotate_90 =  AnimationUtils.loadAnimation(this,R.anim.rotate_90_0);
+    }
+
+    public void onEvent(OnLoadingFailedEntity e)
+    {
+        loadingFailedView.setVisibility(View.VISIBLE);
     }
 
 

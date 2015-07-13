@@ -22,4 +22,6 @@
     <string name="jubao">版权举报</string>
     <string name="bottom_1">每日精选</string>
     <string name="bottom_2">往期分类</string>
+    <string name="net_error">网络错误</string>
+    <string name="click_to_retry">点击屏幕冲死</string>
 </resources>

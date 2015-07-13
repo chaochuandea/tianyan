@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
+import dachuan.com.tianyan.AppContext;
 import dachuan.com.tianyan.R;
 import dachuan.com.tianyan.api.Client;
 import dachuan.com.tianyan.model.Cache;
@@ -31,6 +32,8 @@ import dachuan.com.tianyan.view.activity.MainActivity;
 import dachuan.com.tianyan.view.adapter.DetailViewPagerAdapter;
 import dachuan.com.tianyan.view.adapter.EveryDayAdapter;
 import dachuan.com.tianyan.view.base.BaseFragment;
+import dachuan.com.tianyan.view.entity.OnLoadingFailedEntity;
+import dachuan.com.tianyan.view.entity.OnReLoadingEntity;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
@@ -64,6 +67,7 @@ public class EveryDayFragment extends BaseFragment {
 
     @Override
     public void init(Bundle savedInstanceState) {
+        AppContext.instance().getBus().register(this);
 //        token = getArguments().getString(MainActivity.INTENT_TOKEN);
         pageTask = new PageTask();
         pageTask.getPageSubject().onNext(1);
@@ -90,7 +94,7 @@ public class EveryDayFragment extends BaseFragment {
 
 
 
-    //½ÓÊÕpage£¬¿ªÊ¼ÇëÇóÊý¾Ý,È»ºócache,È»ºóÏìÓ¦Êý¾Ý
+    //ï¿½ï¿½ï¿½ï¿½pageï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,È»ï¿½ï¿½cache,È»ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½
     private void initData(){
 
         pageTask.getPageSubject().subscribe(integer -> {
@@ -106,9 +110,10 @@ public class EveryDayFragment extends BaseFragment {
     private void initListener(){
         swipe.setOnRefreshListener(() -> {
             subscribe(Observable.timer(2, TimeUnit.SECONDS, Schedulers.io()), aLong1 -> {
-                addData(10);
-                adapter.notifyDataSetChanged();
+//                addData(10);
+//                adapter.notifyDataSetChanged();
                 swipe.setRefreshing(false);
+                AppContext.instance().getBus().post(new OnLoadingFailedEntity());
             });
         });
     }
@@ -124,7 +129,7 @@ public class EveryDayFragment extends BaseFragment {
     {
         for (int i = 0 ;i < size ;i ++ )
         {
-            datalist.add("ÕâÊÇ±êÌâ"  + i );
+            datalist.add("what the hell "  + i );
         }
     }
 
@@ -134,5 +139,19 @@ public class EveryDayFragment extends BaseFragment {
     @Override
     public int getLayoutId() {
         return R.layout.fragment_everyday;
+    }
+
+    public void onEvent(OnReLoadingEntity e)
+    {
+        swipe.setRefreshing(true);
+        subscribe(Observable.timer(2, TimeUnit.SECONDS, Schedulers.io()),action->{
+            getData();
+        });
+    }
+
+    @Override
+    public void onDestroyView() {
+        AppContext.instance().getBus().unregister(this);
+        super.onDestroyView();
     }
 }

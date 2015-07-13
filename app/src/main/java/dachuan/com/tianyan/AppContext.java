@@ -45,7 +45,7 @@ public class AppContext extends Application {
         return instance;
     }
 
-    public static EventBus getBus(){
+    public  EventBus getBus(){
         return bus;
     }
 

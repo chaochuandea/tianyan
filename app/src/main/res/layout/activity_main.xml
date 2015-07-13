@@ -21,6 +21,18 @@
         android:layout_above="@id/bottombar"
         android:layout_height="match_parent">
     </dachuan.com.tianyan.view.widget.StaticViewpager>
+
+    <FrameLayout
+        android:id="@+id/loading_failed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:visibility="invisible"
+        android:alpha="0.8"
+        android:elevation="4dp">
+
+        <include layout="@layout/loading_failed"/>
+    </FrameLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/detail_view"
