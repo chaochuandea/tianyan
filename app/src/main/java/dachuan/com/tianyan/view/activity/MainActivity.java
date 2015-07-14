@@ -1,5 +1,6 @@
 package dachuan.com.tianyan.view.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -312,6 +313,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
 
             View  cover = view.findViewById(R.id.cover);
+            cover.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainActivity.this,VideoActivity.class);
+                    startActivity(intent);
+                }
+            });
             View blurringview = view.findViewById(R.id.blurringview);
             View text_con = view.findViewById(R.id.text);
             if (v<=0&&v>=-1){

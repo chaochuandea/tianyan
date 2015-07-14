@@ -46,7 +46,6 @@ public class GridAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
         ViewGroup.LayoutParams params = viewHolder.rootView.getLayoutParams();
-        Log.i("is null","  "+(params == null));
         viewHolder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,10 +4,9 @@ apply plugin: 'me.tatarka.retrolambda'
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
-
     defaultConfig {
         applicationId "dachuan.com.tianyan"
-        minSdkVersion 13
+        minSdkVersion 15
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
@@ -18,11 +17,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    productFlavors {
+    }
+
 }
 
 dependencies {
@@ -45,4 +46,5 @@ dependencies {
     compile 'uk.co.chrisjenx:calligraphy:2.1.0'
     compile 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
     compile 'com.astuetz:pagerslidingtabstrip:1.0.1'
+    compile 'me.neavo:vitamio:4.2.2'
 }
