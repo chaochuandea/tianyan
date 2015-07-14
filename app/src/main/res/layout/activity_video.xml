@@ -1,13 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primary_dark_material_dark"
+    android:background="@color/background_white"
     android:orientation="vertical">
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <io.vov.vitamio.widget.VideoView
         android:id="@+id/video"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"/>
+    </RelativeLayout>
 
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/loading_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_black">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateBehavior="cycle"
+            android:layout_gravity="center"/>
+
+
+    </FrameLayout>
+
+
+</FrameLayout>

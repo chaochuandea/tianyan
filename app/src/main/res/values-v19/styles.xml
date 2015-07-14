@@ -1,6 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="android:windowActionBar">false</item>
@@ -8,8 +8,8 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-
-    <style name="TransparentNavigationBar" parent="AppTheme"/>
-
-
+    <style name="TransparentNavigationBar" parent="AppTheme">
+        <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
 </resources>

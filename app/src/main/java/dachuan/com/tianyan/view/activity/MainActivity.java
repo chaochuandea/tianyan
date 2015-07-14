@@ -43,6 +43,7 @@ import dachuan.com.tianyan.view.entity.OnLoadingFailedEntity;
 import dachuan.com.tianyan.view.entity.OnReLoadingEntity;
 import dachuan.com.tianyan.view.fragment.MovieDetailFragment;
 import dachuan.com.tianyan.view.widget.StaticViewpager;
+import io.vov.vitamio.LibsChecker;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -201,6 +202,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void init(Bundle savedInstanceState) {
+        if (!LibsChecker.checkVitamioLibs(this))
+            return;
         AppContext.instance().getBus().register(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
