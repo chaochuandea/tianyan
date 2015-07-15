@@ -23,6 +23,7 @@
         android:id="@+id/loading_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:background="@color/background_black">
 
         <ProgressBar
@@ -34,5 +35,18 @@
 
     </FrameLayout>
 
+    <FrameLayout
+        android:id="@+id/video_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_black_with_transparent"
+        android:padding="10dp">
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="left|top"
+            android:src="@android:drawable/ic_menu_revert"/>
+    </FrameLayout>
 
 </FrameLayout>

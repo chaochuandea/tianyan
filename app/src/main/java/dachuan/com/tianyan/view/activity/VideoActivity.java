@@ -27,6 +27,9 @@ public class VideoActivity extends BaseActivity{
 
     MediaController mediaController;
 
+    @Bind(R.id.video_back)
+    View back;
+
     View dview;
 
     @Override
@@ -37,18 +40,20 @@ public class VideoActivity extends BaseActivity{
     @Override
     public void init(Bundle savedInstanceState) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        loading.setVisibility(View.VISIBLE);
+        back.setVisibility(View.GONE);
+        back.findViewById(R.id.img).setOnClickListener(v->finish());
         Uri uri = Uri.parse("http://www.modrails.com/videos/passenger_nginx.mov");
         video.setVideoURI(uri);
         video.setVideoQuality(MediaPlayer.VIDEOQUALITY_LOW);
         dview = getWindow().getDecorView();
-        int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        dview.setSystemUiVisibility(option);
+        dview.setSystemUiVisibility(View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION | View.SYSTEM_UI_FLAG_FULLSCREEN);
         mediaController = new MediaController(this);
         mediaController.setAnchorView(video);
         mediaController.setOnHiddenListener(
-                ()->dview.setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION));
+                ()->back.setVisibility(View.GONE));
         mediaController.setOnShownListener(
-                ()->dview.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE));
+                ()->back.setVisibility(View.VISIBLE));
         video.setMediaController(mediaController);
         video.requestFocus();
         video.setOnSeekCompleteListener(mediaPlayer -> {

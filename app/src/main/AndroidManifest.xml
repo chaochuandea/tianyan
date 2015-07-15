@@ -31,7 +31,6 @@
             android:name=".view.activity.MainActivity"
             />
         <activity android:name=".view.activity.VideoActivity"
-            android:theme="@style/TransparentNavigationBar"
             android:screenOrientation="landscape"
             android:process=":vitamio"/>
         <activity android:name="io.vov.vitamio.activity.InitActivity"

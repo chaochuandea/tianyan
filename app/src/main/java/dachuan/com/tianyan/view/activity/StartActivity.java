@@ -98,4 +98,10 @@ public class StartActivity extends BaseActivity {
 
         });
     }
+
+    public void initVitamio() {
+
+
+
+    }
 }
