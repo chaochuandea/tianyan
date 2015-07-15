@@ -1,6 +1,7 @@
 package dachuan.com.tianyan.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import dachuan.com.tianyan.R;
+import dachuan.com.tianyan.view.activity.SortDetailAcitivity;
 import dachuan.com.tianyan.view.widget.BlurView;
 
 /**
@@ -49,7 +51,10 @@ public class GridAdapter extends RecyclerView.Adapter {
         viewHolder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(viewHolder.rootView.getContext(), "" + position + "was click", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setClass(mcontext, SortDetailAcitivity.class);
+                intent.putExtra("title",list.get(position));
+                mcontext.startActivity(intent);
             }
         });
         viewHolder.rootView.setOnTouchListener(new View.OnTouchListener() {

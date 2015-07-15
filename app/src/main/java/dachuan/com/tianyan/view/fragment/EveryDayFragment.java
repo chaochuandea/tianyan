@@ -116,6 +116,21 @@ public class EveryDayFragment extends BaseFragment {
                 AppContext.instance().getBus().post(new OnLoadingFailedEntity());
             });
         });
+        mainlist.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+              int lastVisableItem = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+                if(lastVisableItem == recyclerView.getLayoutManager().getItemCount())
+                {
+
+                }
+            }
+        });
     }
 
     private void getData() {

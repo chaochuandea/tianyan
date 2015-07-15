@@ -12,5 +12,6 @@
     <color name="white">#ffffff</color>
     <color name="text_activated">#CC000000</color>
     <color name="text_normal">#CC808080</color>
+    <color name="line">#FF808080</color>
 </resources>
 

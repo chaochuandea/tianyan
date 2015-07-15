@@ -36,6 +36,9 @@
         <activity android:name="io.vov.vitamio.activity.InitActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
             />
+        <activity android:name=".view.activity.SortDetailAcitivity"
+            android:screenOrientation="nosensor"
+            />
         <!-- 设置AppKey -->
         <meta-data android:name="TESTIN_APPKEY" android:value="764a9393a5053e48d6927c4877bb87c8"/>
         <!-- 设置渠道信息 -->
