@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_below="@+id/toolbar"
+    android:orientation="vertical"
+    android:background="@color/transparent"
+    android:alpha="0.98"
+    android:elevation="3dp">
+
+
+    <RelativeLayout
+        android:id="@+id/toolbar_dropdown"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_white">
+    <dachuan.com.tianyan.view.widget.StaticViewpager
+        android:id="@+id/toolbar_viewpager"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/up_con"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/up_con"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content">
+            <View
+                android:layout_width="match_parent"
+                android:background="@color/line"
+                android:layout_height="0.1dp"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:src="@mipmap/up_arrow"
+                android:scaleType="fitCenter"
+                android:id="@+id/up"
+                android:background="@drawable/up_selector"
+                android:padding="10dp"
+                android:layout_height="48dp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

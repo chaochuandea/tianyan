@@ -66,8 +66,8 @@ public class GridAdapter extends RecyclerView.Adapter {
                         firstX = event.getX();
                         firstY = event.getY();
                         animatorSet.playTogether(ObjectAnimator.ofFloat(viewHolder.textLayout, "alpha", 1.0f, 0.0f)
-                                .setDuration(800), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.5f, 0.0f)
-                                .setDuration(800));
+                                .setDuration(500), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.5f, 0.0f)
+                                .setDuration(500));
                         animatorSet.start();
                         return true;
                     case MotionEvent.ACTION_MOVE:
@@ -78,8 +78,8 @@ public class GridAdapter extends RecyclerView.Adapter {
                         else if (dx < dy) isFlipUp = true;
                         if (isFlipUp) {
                             animatorSet.playTogether(ObjectAnimator.ofFloat(viewHolder.textLayout, "alpha", 0.0f, 1.0f)
-                                    .setDuration(800), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.0f, 0.5f)
-                                    .setDuration(800));
+                                    .setDuration(500), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.0f, 0.5f)
+                                    .setDuration(500));
                             animatorSet.start();
                             return false;
                         } else break;
@@ -88,8 +88,8 @@ public class GridAdapter extends RecyclerView.Adapter {
                     case MotionEvent.ACTION_CANCEL:
                     case MotionEvent.ACTION_OUTSIDE:
                         animatorSet.playTogether(ObjectAnimator.ofFloat(viewHolder.textLayout, "alpha", 0.0f, 1.0f)
-                                .setDuration(800), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.0f, 0.5f)
-                                .setDuration(800));
+                                .setDuration(500), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.0f, 0.5f)
+                                .setDuration(500));
                         animatorSet.start();
                         break;
                 }

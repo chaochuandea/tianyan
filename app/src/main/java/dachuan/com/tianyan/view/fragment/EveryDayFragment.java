@@ -1,21 +1,9 @@
 package dachuan.com.tianyan.view.fragment;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import com.ToxicBakery.viewpager.transforms.ABaseTransformer;
-import com.astuetz.PagerSlidingTabStrip;
-import com.nineoldandroids.view.ViewHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +16,6 @@ import dachuan.com.tianyan.api.Client;
 import dachuan.com.tianyan.model.Cache;
 import dachuan.com.tianyan.task.CacheTask;
 import dachuan.com.tianyan.task.PageTask;
-import dachuan.com.tianyan.view.activity.MainActivity;
-import dachuan.com.tianyan.view.adapter.DetailViewPagerAdapter;
 import dachuan.com.tianyan.view.adapter.EveryDayAdapter;
 import dachuan.com.tianyan.view.base.BaseFragment;
 import dachuan.com.tianyan.view.entity.OnLoadingFailedEntity;
@@ -59,21 +45,21 @@ public class EveryDayFragment extends BaseFragment {
     private List<String> datalist = new ArrayList<String>();
     private static String CACHE_KEY = "main_activity_data";
 
-    private View detail_view;
+//    private View detail_view;
 
-    public void setDetail_view(View detail_view) {
-        this.detail_view = detail_view;
-    }
+//    public void setDetail_view(View detail_view) {
+//        this.detail_view = detail_view;
+//    }
 
     @Override
     public void init(Bundle savedInstanceState) {
         AppContext.instance().getBus().register(this);
-//        token = getArguments().getString(MainActivity.INTENT_TOKEN);
+//        token = getArguments().getString(MainActivity_backup.INTENT_TOKEN);
         pageTask = new PageTask();
         pageTask.getPageSubject().onNext(1);
 
 
-        adapter = new EveryDayAdapter(datalist,detail_view);
+        adapter = new EveryDayAdapter(datalist,getActivity());
         mainlist.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mainlist.setAdapter(adapter);
 

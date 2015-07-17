@@ -21,14 +21,13 @@
             android:screenOrientation="nosensor"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
         <activity
             android:screenOrientation="nosensor"
-            android:name=".view.activity.MainActivity"
+            android:name=".view.activity.MainActivity_backup"
             />
         <activity android:name=".view.activity.VideoActivity"
             android:screenOrientation="landscape"
@@ -39,6 +38,11 @@
         <activity android:name=".view.activity.SortDetailAcitivity"
             android:screenOrientation="nosensor"
             />
+        <activity android:name=".view.activity.ItemDetailActivity"
+            android:screenOrientation="nosensor"
+            />
+        <activity android:name=".view.activity.MainActivity"
+            android:screenOrientation="nosensor"/>
         <!-- 设置AppKey -->
         <meta-data android:name="TESTIN_APPKEY" android:value="764a9393a5053e48d6927c4877bb87c8"/>
         <!-- 设置渠道信息 -->

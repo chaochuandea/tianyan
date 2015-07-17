@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_above="@id/up_con"
+        android:background="@color/white"
+        android:id="@+id/setting_neirong"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="25dp"
+                android:textSize="12sp"
+                android:textColor="@color/text_color_primeray"
+                android:text="@string/use_liuliang"/>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:text="@string/open"
+                    android:button="@null"
+                    android:checked="true"
+                    android:textColor="@color/text_checked"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="/"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:text="@string/close"
+                    android:button="@null"
+                    android:textColor="@color/text_checked"
+                    android:layout_height="wrap_content" />
+            </RadioGroup>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:layout_marginTop="25dp"
+                android:textColor="@color/text_color_primeray"
+                android:text="@string/update_tips"/>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:text="@string/open"
+                    android:button="@null"
+                    android:checked="true"
+                    android:textColor="@color/text_checked"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="/"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_height="wrap_content" />
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:text="@string/close"
+                    android:button="@null"
+                    android:textColor="@color/text_checked"
+                    android:layout_height="wrap_content" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:layout_marginTop="25dp"
+                android:textColor="@color/text_color_primeray"
+                android:text="@string/clear_cache"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:layout_marginTop="25dp"
+                android:textColor="@color/text_color_primeray"
+                android:text="@string/update"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:layout_marginTop="25dp"
+                android:textColor="@color/text_color_primeray"
+                android:text="@string/tiaokuan"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:layout_marginTop="25dp"
+                android:textColor="@color/text_color_primeray"
+                android:text="@string/movie_tips"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="16sp"
+                android:layout_marginTop="25dp"
+                android:textColor="@color/text_color_primeray"
+                android:text="@string/jubao"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

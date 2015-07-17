@@ -42,7 +42,7 @@ public class SortDetailAcitivity extends BaseActivity {
     @Override
     public void init(Bundle savedInstanceState) {
         getData();
-        adapter = new EveryDayAdapter(DataLIist,findViewById(R.id.view));
+        adapter = new EveryDayAdapter(DataLIist,this);
         title.setText(getIntent().getStringExtra("title"));
         sortList.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         sortList.setAdapter(adapter);

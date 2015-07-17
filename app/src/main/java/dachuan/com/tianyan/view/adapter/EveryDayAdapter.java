@@ -3,6 +3,8 @@ package dachuan.com.tianyan.view.adapter;
 import com.nineoldandroids.animation.AnimatorSet;
 
 import android.animation.StateListAnimator;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.LayerDrawable;
 import android.graphics.drawable.RotateDrawable;
 import android.graphics.drawable.ScaleDrawable;
@@ -30,6 +32,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import dachuan.com.tianyan.R;
 import dachuan.com.tianyan.util.Blur;
+import dachuan.com.tianyan.view.activity.ItemDetailActivity;
 import dachuan.com.tianyan.view.widget.BlurView;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -48,9 +51,10 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
     private boolean isFlipUp;
     private List<String> list;
     private View detailView;
+    private Context mcontext;
 
-    public EveryDayAdapter(List<String> list,View detailView) {
-        this.detailView = detailView;
+    public EveryDayAdapter(List<String> list,Context context) {
+        this.mcontext = context;
         this.list = list;
     }
 
@@ -66,7 +70,8 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
         viewHolder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                detailView.setVisibility(View.VISIBLE);
+                Intent intent = new Intent(mcontext, ItemDetailActivity.class);
+                mcontext.startActivity(intent);
             }
         });
         viewHolder.rootView.setOnTouchListener(new View.OnTouchListener() {
@@ -78,8 +83,8 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
                         firstX = event.getX();
                         firstY = event.getY();
                         animatorSet.playTogether(ObjectAnimator.ofFloat(viewHolder.textLayout, "alpha", 1.0f, 0.0f)
-                                .setDuration(800), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.5f, 0.0f)
-                                .setDuration(800));
+                                .setDuration(500), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.5f, 0.0f)
+                                .setDuration(500));
                         animatorSet.start();
                         return true;
                     case MotionEvent.ACTION_MOVE:
@@ -90,8 +95,8 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
                         else if (dx < dy) isFlipUp = true;
                         if (isFlipUp) {
                             animatorSet.playTogether(ObjectAnimator.ofFloat(viewHolder.textLayout, "alpha", 0.0f, 1.0f)
-                                    .setDuration(800), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.0f, 0.5f)
-                                    .setDuration(800));
+                                    .setDuration(500), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.0f, 0.5f)
+                                    .setDuration(500));
                             animatorSet.start();
                             return false;
                         } else break;
@@ -99,8 +104,8 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
                     case MotionEvent.ACTION_OUTSIDE:
                     case MotionEvent.ACTION_CANCEL:
                         animatorSet.playTogether(ObjectAnimator.ofFloat(viewHolder.textLayout, "alpha", 0.0f, 1.0f)
-                                .setDuration(800), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.0f, 0.5f)
-                                .setDuration(800));
+                                .setDuration(500), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.0f, 0.5f)
+                                .setDuration(500));
                         animatorSet.start();
                         break;
                 }
