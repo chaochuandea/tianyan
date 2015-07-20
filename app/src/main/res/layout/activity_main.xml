@@ -4,9 +4,7 @@
     android:layout_height="match_parent"
     >
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/toolbar"/>
-    <include layout="@layout/toolbar_dropdown"/>
+
 
     <include
         layout="@layout/tab_bar_bottom"
@@ -33,5 +31,9 @@
 
         <include layout="@layout/loading_failed"/>
     </FrameLayout>
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+    <include layout="@layout/toolbar_dropdown"/>
+
 
 </RelativeLayout>

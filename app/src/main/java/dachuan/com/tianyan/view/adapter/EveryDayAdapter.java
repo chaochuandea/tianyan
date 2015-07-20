@@ -2,42 +2,25 @@ package dachuan.com.tianyan.view.adapter;
 
 import com.nineoldandroids.animation.AnimatorSet;
 
-import android.animation.StateListAnimator;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.RotateDrawable;
-import android.graphics.drawable.ScaleDrawable;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.nineoldandroids.animation.ObjectAnimator;
-import com.nineoldandroids.animation.ValueAnimator;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import dachuan.com.tianyan.R;
-import dachuan.com.tianyan.util.Blur;
 import dachuan.com.tianyan.view.activity.ItemDetailActivity;
 import dachuan.com.tianyan.view.widget.BlurView;
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import timber.log.Timber;
 
 
 /**
@@ -60,7 +43,7 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_test, null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_main, null);
         return new ViewHolder(v);
     }
 

@@ -3,13 +3,11 @@ package dachuan.com.tianyan.view.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.nineoldandroids.animation.AnimatorSet;
@@ -40,7 +38,7 @@ public class GridAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_test2, null);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_grid, null);
         return new ViewHolder(v);
     }
 

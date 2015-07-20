@@ -6,8 +6,8 @@
     >
 
     <include layout="@layout/toolbar"
-        android:id="@+id/toolbar"/>
-    <include layout="@layout/toolbar_dropdown"/>
+        android:id="@+id/toolbar"
+        />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -31,5 +31,8 @@
             android:layout_height="32dp"
             android:layout_alignParentBottom="true" />
     </RelativeLayout>
+
+    <include layout="@layout/toolbar_dropdown"/>
+
 
 </RelativeLayout>

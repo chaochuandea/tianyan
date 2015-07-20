@@ -1,9 +1,12 @@
 package dachuan.com.tianyan.view.fragment;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +48,9 @@ public class EveryDayFragment extends BaseFragment {
     private List<String> datalist = new ArrayList<String>();
     private static String CACHE_KEY = "main_activity_data";
 
+    private int lastItem;
+
+    private boolean gettingData = false;
 //    private View detail_view;
 
 //    public void setDetail_view(View detail_view) {
@@ -57,23 +63,13 @@ public class EveryDayFragment extends BaseFragment {
 //        token = getArguments().getString(MainActivity_backup.INTENT_TOKEN);
         pageTask = new PageTask();
         pageTask.getPageSubject().onNext(1);
-
-
+        swipe.setColorSchemeColors(Color.CYAN, Color.GREEN, Color.RED, Color.YELLOW);
         adapter = new EveryDayAdapter(datalist,getActivity());
         mainlist.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mainlist.setAdapter(adapter);
-
-
         initListener();
         initData();
         getData();
-
-
-
-
-
-
-
     }
 
 
@@ -95,35 +91,36 @@ public class EveryDayFragment extends BaseFragment {
 
     private void initListener(){
         swipe.setOnRefreshListener(() -> {
-            subscribe(Observable.timer(2, TimeUnit.SECONDS, Schedulers.io()), aLong1 -> {
-//                addData(10);
-//                adapter.notifyDataSetChanged();
-                swipe.setRefreshing(false);
-                AppContext.instance().getBus().post(new OnLoadingFailedEntity());
-            });
+            getData();
         });
         mainlist.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastItem + 1 == adapter.getItemCount()) {
+                    swipe.setRefreshing(true);
+                    getData();
+                }
             }
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-              int lastVisableItem = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
-                if(lastVisableItem == recyclerView.getLayoutManager().getItemCount())
-                {
-
-                }
+                lastItem = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
             }
         });
     }
 
     private void getData() {
-        addData(10);
-        adapter.notifyDataSetChanged();
-        swipe.setRefreshing(false);
-
+        Log.i("master","I'm getting Data.");
+        if (gettingData) return ;
+        gettingData = true;
+        swipe.setRefreshing(true);
+        subscribe(Observable.timer(2, TimeUnit.SECONDS, Schedulers.io()), aLong1 -> {
+            addData(10);
+            adapter.notifyDataSetChanged();
+            swipe.setRefreshing(false);
+            gettingData = false;
+        });
     }
 
     private void addData(int size)
@@ -145,7 +142,7 @@ public class EveryDayFragment extends BaseFragment {
     public void onEvent(OnReLoadingEntity e)
     {
         swipe.setRefreshing(true);
-        subscribe(Observable.timer(2, TimeUnit.SECONDS, Schedulers.io()),action->{
+        subscribe(Observable.timer(2, TimeUnit.SECONDS, Schedulers.io()), action -> {
             getData();
         });
     }
@@ -155,4 +152,6 @@ public class EveryDayFragment extends BaseFragment {
         AppContext.instance().getBus().unregister(this);
         super.onDestroyView();
     }
+
+
 }

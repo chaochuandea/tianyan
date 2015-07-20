@@ -25,10 +25,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-            android:screenOrientation="nosensor"
-            android:name=".view.activity.MainActivity_backup"
-            />
         <activity android:name=".view.activity.VideoActivity"
             android:screenOrientation="landscape"
             android:process=":vitamio"/>
