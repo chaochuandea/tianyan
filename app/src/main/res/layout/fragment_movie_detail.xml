@@ -3,48 +3,54 @@
     android:orientation="vertical" android:layout_width="match_parent"
     xmlns:fresco="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent">
-    <dachuan.com.tianyan.view.widget.SquareLayout
+    <LinearLayout
         android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="wrap_content">
         <dachuan.com.tianyan.view.widget.ZoomDraweeView
             android:layout_width="match_parent"
-            fresco:placeholderImage="@mipmap/img_start"
+            fresco:placeholderImage="@drawable/default_bg"
             android:id="@+id/cover"
             fresco:placeholderImageScaleType="centerCrop"
-            android:layout_height="match_parent" />
-    </dachuan.com.tianyan.view.widget.SquareLayout>
-
+            android:layout_height="300dp" />
+    </LinearLayout>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <dachuan.com.tianyan.view.widget.BlurView
             android:layout_width="match_parent"
             android:id="@+id/blurringview"
+            fresco:placeholderImage="@drawable/default_bg"
             android:layout_height="match_parent" />
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:id="@+id/text"
+            android:layout_margin="10dp"
             android:layout_height="wrap_content">
             <dachuan.com.tianyan.view.widget.AnimateTextView
                 android:layout_width="match_parent"
                 android:id="@+id/title"
-                android:text="@string/app_name_en"
                 android:layout_centerHorizontal="true"
-                android:textSize="17sp"
+                android:textSize="19sp"
                 android:layout_margin="5dp"
                 android:textColor="@android:color/white"
                 android:layout_height="wrap_content" />
-            <View
-                android:layout_width="100dp"
-                android:background="@color/white"
-                android:layout_margin="5dp"
-                android:layout_height="1dp"/>
+
+            <dachuan.com.tianyan.view.widget.AnimateTextView
+                android:layout_width="match_parent"
+                android:id="@+id/underline"
+                android:textScaleX="2"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="-15dp"
+                android:layout_centerHorizontal="true"
+                android:textSize="14sp"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content" />
             <dachuan.com.tianyan.view.widget.AnimateTextView
                 android:layout_width="match_parent"
                 android:id="@+id/tag"
-                android:layout_margin="5dp"
-                android:text="@string/app_name_en"
+                android:layout_marginLeft="5dp"
                 android:layout_centerHorizontal="true"
                 android:textSize="14sp"
                 android:textColor="@android:color/white"
@@ -53,10 +59,10 @@
             <dachuan.com.tianyan.view.widget.AnimateTextView
                 android:layout_width="match_parent"
                 android:id="@+id/description"
-                android:text="@string/app_name_en"
-                android:layout_margin="5dp"
+                android:layout_marginLeft="5dp"
                 android:layout_centerHorizontal="true"
                 android:textSize="12sp"
+                android:maxLines="3"
                 android:textColor="@android:color/white"
                 android:layout_height="wrap_content" />
         </LinearLayout>
