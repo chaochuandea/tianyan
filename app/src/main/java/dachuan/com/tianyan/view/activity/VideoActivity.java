@@ -41,7 +41,7 @@ public class VideoActivity extends BaseActivity{
     public void init(Bundle savedInstanceState) {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         loading.setVisibility(View.VISIBLE);
-        back.setVisibility(View.GONE);
+        back.setVisibility(View.VISIBLE);
         back.findViewById(R.id.img).setOnClickListener(v->finish());
         Uri uri = Uri.parse("http://www.modrails.com/videos/passenger_nginx.mov");
         video.setVideoURI(uri);
@@ -61,6 +61,7 @@ public class VideoActivity extends BaseActivity{
         });
         video.setOnPreparedListener(mediaPlayer -> {
             subscribe(Observable.just(null), action -> {
+                back.setVisibility(View.GONE);
                 loading.setVisibility(View.GONE);
                 mediaPlayer.start();
             });
