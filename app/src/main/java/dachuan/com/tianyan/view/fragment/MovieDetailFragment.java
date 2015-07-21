@@ -42,6 +42,10 @@ public class MovieDetailFragment extends BaseFragment {
     AnimateTextView description;
 @Bind(R.id.text)
     View text;
+    @Bind(R.id.underline)
+    AnimateTextView underline;
+
+
     List<String> pictures = new ArrayList<>();
     @Override
     public void init(Bundle savedInstanceState) {
@@ -64,10 +68,17 @@ public class MovieDetailFragment extends BaseFragment {
 
     public void startAnimation(){
         text.setVisibility(View.VISIBLE);
-        title.animateText("aaaaaaaa" + new Random().nextInt(100));
+        String titles = "aaaaaaaa" + new Random().nextInt(100);
+        title.animateText(titles);
         tag.animateText("" + new Random().nextInt(1000000));
         description.animateText("" + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000) + new Random().nextInt(1000000));
-
+        String underline_str = "";
+        int length = 5;
+        if (titles.length()>5) length = titles.length()-3;
+        for (int i = 0;i<length;i++){
+            underline_str +="_";
+        }
+        underline.animateText(underline_str);
     }
 
     public void hideTextView(){

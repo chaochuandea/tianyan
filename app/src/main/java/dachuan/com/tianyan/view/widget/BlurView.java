@@ -33,16 +33,20 @@ import rx.subjects.PublishSubject;
  * Created by maibenben on 2015/7/8.
  */
 public class BlurView extends SimpleDraweeView{
+    private Context context;
     public BlurView(Context context) {
         super(context);
+        this.context = context;
     }
 
     public BlurView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
     }
 
     public BlurView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        this.context = context;
     }
 
 
@@ -51,7 +55,8 @@ public class BlurView extends SimpleDraweeView{
         Postprocessor postprocessor = new BasePostprocessor() {
             @Override
             public void process(Bitmap bitmap) {
-                Blur.apply(getContext(), bitmap, 10);
+                        Blur.apply(context, bitmap, 8);
+
             }
         };
 

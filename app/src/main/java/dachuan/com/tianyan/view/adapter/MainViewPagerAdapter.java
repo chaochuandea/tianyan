@@ -35,4 +35,7 @@ public class MainViewPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return 2;
     }
+
+
+
 }
