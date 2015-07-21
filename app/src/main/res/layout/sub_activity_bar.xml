@@ -27,18 +27,7 @@
         android:padding="10dp"
         android:layout_gravity="center|right"
         android:src="@mipmap/eye"/>
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_gravity="bottom"
-        android:background="@color/line"/>
-    <FrameLayout
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:background="@color/background_black_with_transparent"
-        android:padding="25dp"
-        />
+
+
 
 </FrameLayout>

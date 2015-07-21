@@ -64,6 +64,6 @@ public class SortDetailAcitivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        findViewById(R.id.view).setVisibility(View.GONE);
+        finish();
     }
 }

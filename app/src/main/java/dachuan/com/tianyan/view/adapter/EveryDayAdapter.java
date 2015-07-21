@@ -28,7 +28,8 @@ import dachuan.com.tianyan.view.widget.BlurView;
  */
 public class EveryDayAdapter extends RecyclerView.Adapter {
 
-
+    static final int NORMAL_ITEM = 0;
+    static final int LAST_ITEM = 1;
     private float firstX;
     private float firstY;
     private boolean isFlipUp;
@@ -36,19 +37,26 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
     private View detailView;
     private Context mcontext;
 
-    public EveryDayAdapter(List<String> list,Context context) {
+    public EveryDayAdapter(List<String> list, Context context) {
         this.mcontext = context;
         this.list = list;
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_main, null);
-        return new ViewHolder(v);
+        View v = null;
+        if (viewType == NORMAL_ITEM) {
+            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_main, null);
+            return new ViewHolder(v);
+        } else {
+            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.holder_loading, null);
+            return new LastView(v);
+        }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (position + 1 == list.size()) return;
         ViewHolder viewHolder = (ViewHolder) holder;
         viewHolder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +91,8 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
                             animatorSet.start();
                             return false;
                         } else break;
-                    case MotionEvent.ACTION_UP: viewHolder.rootView.performClick();
+                    case MotionEvent.ACTION_UP:
+                        viewHolder.rootView.performClick();
                     case MotionEvent.ACTION_OUTSIDE:
                     case MotionEvent.ACTION_CANCEL:
                         animatorSet.playTogether(ObjectAnimator.ofFloat(viewHolder.textLayout, "alpha", 0.0f, 1.0f)
@@ -104,6 +113,13 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position + 1 == list.size())
+            return LAST_ITEM;
+        else return NORMAL_ITEM;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -130,6 +146,12 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
 //            name = (TextView) itemView.findViewById(R.id.name);
 //            tag_and_time = (TextView) itemView.findViewById(R.id.tag_and_time);
 //            rotate = (ImageView) itemView.findViewById(R.id.rotate);
+        }
+    }
+
+    static class LastView extends RecyclerView.ViewHolder {
+        public LastView(View itemView) {
+            super(itemView);
         }
     }
 }

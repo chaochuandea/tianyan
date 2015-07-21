@@ -2,6 +2,7 @@ package dachuan.com.tianyan.view.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -111,5 +112,10 @@ public class MainActivity extends ToolBarActivity implements View.OnClickListene
             return true;
         });
         cancelRetry.setOnClickListener(v -> loadingFailedView.setVisibility(View.GONE));
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 }

@@ -50,7 +50,7 @@ public class EveryDayFragment extends BaseFragment {
 
     private int lastItem;
 
-    private boolean gettingData = false;
+    private boolean gettingData;
 //    private View detail_view;
 
 //    public void setDetail_view(View detail_view) {
@@ -76,7 +76,6 @@ public class EveryDayFragment extends BaseFragment {
 
 
 
-    //����page����ʼ��������,Ȼ��cache,Ȼ����Ӧ����
     private void initData(){
 
         pageTask.getPageSubject().subscribe(integer -> {
@@ -91,6 +90,7 @@ public class EveryDayFragment extends BaseFragment {
 
     private void initListener(){
         swipe.setOnRefreshListener(() -> {
+            swipe.setRefreshing(true);
             getData();
         });
         mainlist.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -98,7 +98,6 @@ public class EveryDayFragment extends BaseFragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && lastItem + 1 == adapter.getItemCount()) {
-                    swipe.setRefreshing(true);
                     getData();
                 }
             }
@@ -111,10 +110,8 @@ public class EveryDayFragment extends BaseFragment {
     }
 
     private void getData() {
-        Log.i("master","I'm getting Data.");
         if (gettingData) return ;
         gettingData = true;
-        swipe.setRefreshing(true);
         subscribe(Observable.timer(2, TimeUnit.SECONDS, Schedulers.io()), aLong1 -> {
             addData(10);
             adapter.notifyDataSetChanged();
