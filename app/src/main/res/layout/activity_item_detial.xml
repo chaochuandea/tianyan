@@ -29,7 +29,7 @@
             auto:pstsUnderlineHeight="0.5dp"
             android:layout_width="match_parent"
             android:layout_height="32dp"
-            android:layout_alignParentBottom="true" />
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
     <include layout="@layout/toolbar_dropdown"/>

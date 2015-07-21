@@ -150,7 +150,7 @@ public abstract class ToolBarActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        if (isShowDropDown )
+        if (isShowDropDown && content.getCurrentItem() != MAIN_PAGER)
             backToMainFrom(content.getCurrentItem(),true);
         else if (isShowDropDown)
             hideDropDown();
