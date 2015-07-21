@@ -9,28 +9,29 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <io.vov.vitamio.widget.VideoView
-        android:id="@+id/video"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"/>
+
+        <io.vov.vitamio.widget.VideoView
+            android:id="@+id/video"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true" />
     </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/loading_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone"
-        android:background="@color/background_black">
+        android:background="@color/background_black"
+        android:visibility="gone">
 
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:indeterminateBehavior="cycle"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:indeterminateBehavior="cycle" />
 
 
     </FrameLayout>
@@ -41,12 +42,31 @@
         android:layout_height="wrap_content"
         android:background="@color/background_black_with_transparent"
         android:padding="10dp">
-        <ImageView
-            android:id="@+id/img"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="left|top"
-            android:src="@android:drawable/ic_menu_revert"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:src="@android:drawable/ic_menu_revert" />
+
+            <TextView
+                android:id="@+id/video_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/img"
+                android:text="title"
+                android:textColor="@color/abc_secondary_text_material_dark"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
     </FrameLayout>
 
 </FrameLayout>
