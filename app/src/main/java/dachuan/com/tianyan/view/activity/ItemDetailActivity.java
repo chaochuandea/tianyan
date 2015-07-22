@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,6 +34,9 @@ public class ItemDetailActivity extends ToolBarActivity {
     ViewPager viewPager;
     @Bind(R.id.tabs)
     PagerSlidingTabStrip tabs;
+
+    @Bind(R.id.eye)
+    ImageView right;
 
     List<Fragment> fragments = new ArrayList<>();
     @Override
@@ -89,6 +93,8 @@ public class ItemDetailActivity extends ToolBarActivity {
 
             }
         });
+
+        right.setOnClickListener(V->finish());
     }
 
 

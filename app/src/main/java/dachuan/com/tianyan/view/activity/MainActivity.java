@@ -114,8 +114,5 @@ public class MainActivity extends ToolBarActivity implements View.OnClickListene
         cancelRetry.setOnClickListener(v -> loadingFailedView.setVisibility(View.GONE));
     }
 
-    @Override
-    public void onBackPressed() {
-        finish();
-    }
+
 }

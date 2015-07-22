@@ -49,7 +49,6 @@ public abstract class BaseFragment  extends Fragment {
 
 
     @Override public void onPause() {
-        subscription.clear();
         super.onPause();
     }
 
@@ -66,5 +65,11 @@ public abstract class BaseFragment  extends Fragment {
 
     protected  <T> void subscribe(Observable<T> observable, Action1<? super T> onNext,Action1<Throwable> onError) {
         subscription.add(bindSupportFragment(this, observable.subscribeOn(Schedulers.io())).observeOn(AndroidSchedulers.mainThread()).subscribe(onNext,onError));
+    }
+
+    @Override
+    public void onDestroy() {
+        subscription.clear();
+        super.onDestroy();
     }
 }

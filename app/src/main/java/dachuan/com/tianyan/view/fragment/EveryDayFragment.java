@@ -7,6 +7,8 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,9 +50,13 @@ public class EveryDayFragment extends BaseFragment {
     private List<String> datalist = new ArrayList<String>();
     private static String CACHE_KEY = "main_activity_data";
 
+    private View loadingItem;
+
     private int lastItem;
 
-    private boolean gettingData;
+    private boolean isGetDataFromTop = false;
+    private boolean isFirst = true;
+    private boolean gettingData = false;
 //    private View detail_view;
 
 //    public void setDetail_view(View detail_view) {
@@ -61,10 +67,11 @@ public class EveryDayFragment extends BaseFragment {
     public void init(Bundle savedInstanceState) {
         AppContext.instance().getBus().register(this);
 //        token = getArguments().getString(MainActivity_backup.INTENT_TOKEN);
+        loadingItem = LayoutInflater.from(getActivity()).inflate(R.layout.holder_loading, null);
         pageTask = new PageTask();
         pageTask.getPageSubject().onNext(1);
         swipe.setColorSchemeColors(Color.CYAN, Color.GREEN, Color.RED, Color.YELLOW);
-        adapter = new EveryDayAdapter(datalist,getActivity());
+        adapter = new EveryDayAdapter(datalist, getActivity());
         mainlist.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mainlist.setAdapter(adapter);
         initListener();
@@ -73,10 +80,7 @@ public class EveryDayFragment extends BaseFragment {
     }
 
 
-
-
-
-    private void initData(){
+    private void initData() {
 
         pageTask.getPageSubject().subscribe(integer -> {
             subscribe(Client.getApiService().getUser(token, integer).map(user1 -> {
@@ -88,8 +92,9 @@ public class EveryDayFragment extends BaseFragment {
         });
     }
 
-    private void initListener(){
+    private void initListener() {
         swipe.setOnRefreshListener(() -> {
+            isGetDataFromTop = true;
             swipe.setRefreshing(true);
             getData();
         });
@@ -98,6 +103,7 @@ public class EveryDayFragment extends BaseFragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && lastItem + 1 == adapter.getItemCount()) {
+                    isGetDataFromTop = false;
                     getData();
                 }
             }
@@ -110,7 +116,7 @@ public class EveryDayFragment extends BaseFragment {
     }
 
     private void getData() {
-        if (gettingData) return ;
+        if (gettingData) return;
         gettingData = true;
         subscribe(Observable.timer(2, TimeUnit.SECONDS, Schedulers.io()), aLong1 -> {
             addData(10);
@@ -120,15 +126,26 @@ public class EveryDayFragment extends BaseFragment {
         });
     }
 
-    private void addData(int size)
-    {
-        for (int i = 0 ;i < size ;i ++ )
-        {
-            datalist.add("what the hell "  + i );
+    private void addData(int size) {
+        if (isFirst) {
+            for (int i = 0; i < 10; i++) {
+                datalist.add("I'm the original Data No." + i);
+                isFirst = false;
+            }
+            datalist.add("last");
+        }
+        else if (!isGetDataFromTop) {
+            datalist.remove(datalist.size()-1);
+            for (int i = 0; i < size; i++) {
+                datalist.add("I'm Data From Bottom. No." + i + "!");
+            }
+            datalist.add("last");
+        } else {
+            for (int i = 0; i < size; i++) {
+                datalist.add(i, "I'm Data From Top. No." + i + "!");
+            }
         }
     }
-
-
 
 
     @Override
@@ -136,8 +153,7 @@ public class EveryDayFragment extends BaseFragment {
         return R.layout.fragment_everyday;
     }
 
-    public void onEvent(OnReLoadingEntity e)
-    {
+    public void onEvent(OnReLoadingEntity e) {
         swipe.setRefreshing(true);
         subscribe(Observable.timer(2, TimeUnit.SECONDS, Schedulers.io()), action -> {
             getData();

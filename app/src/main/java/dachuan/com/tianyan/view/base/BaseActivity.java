@@ -43,9 +43,10 @@ public  abstract  class BaseActivity extends AppCompatActivity {
 
     public abstract void init(Bundle savedInstanceState);
 
-    @Override protected void onPause() {
+    @Override
+    protected void onDestroy() {
         subscription.clear();
-        super.onPause();
+        super.onDestroy();
     }
 
     protected <T> void subscribe(Observable<T> observable) {
