@@ -95,6 +95,15 @@
                 android:textColor="@color/text_color_primeray"
                 android:textSize="20sp" />
 
+            <ImageView
+                android:id="@+id/eye"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="14dp"
+                android:padding="10dp"
+                android:src="@mipmap/eye" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -122,6 +131,15 @@
                 android:textColor="@color/text_color_primeray"
                 android:textSize="20sp" />
 
+            <ImageView
+                android:id="@+id/eye"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="14dp"
+                android:padding="10dp"
+                android:src="@mipmap/eye" />
+
         </LinearLayout>
         <LinearLayout
             android:id="@+id/cache_con"
@@ -148,6 +166,15 @@
                 android:textColor="@color/text_color_primeray"
                 android:textSize="20sp" />
 
+            <ImageView
+                android:id="@+id/eye"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="14dp"
+                android:padding="10dp"
+                android:src="@mipmap/eye" />
+
         </LinearLayout>
         <LinearLayout
             android:id="@+id/feedback_con"
@@ -173,6 +200,15 @@
                 android:text="@string/feedback"
                 android:textColor="@color/text_color_primeray"
                 android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/eye"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="right"
+                android:layout_marginRight="14dp"
+                android:padding="10dp"
+                android:src="@mipmap/eye" />
 
         </LinearLayout>
     </FrameLayout>

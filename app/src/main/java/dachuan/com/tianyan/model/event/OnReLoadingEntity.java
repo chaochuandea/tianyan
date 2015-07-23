@@ -1,4 +1,4 @@
-package dachuan.com.tianyan.view.entity;
+package dachuan.com.tianyan.model.event;
 
 /**
  * Created by linsj on 15-7-13.

@@ -1,12 +1,10 @@
 package dachuan.com.tianyan.view.fragment;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -23,8 +21,7 @@ import dachuan.com.tianyan.task.CacheTask;
 import dachuan.com.tianyan.task.PageTask;
 import dachuan.com.tianyan.view.adapter.EveryDayAdapter;
 import dachuan.com.tianyan.view.base.BaseFragment;
-import dachuan.com.tianyan.view.entity.OnLoadingFailedEntity;
-import dachuan.com.tianyan.view.entity.OnReLoadingEntity;
+import dachuan.com.tianyan.model.event.OnReLoadingEntity;
 import rx.Observable;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;

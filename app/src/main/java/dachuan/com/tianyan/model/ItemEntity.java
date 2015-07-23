@@ -1,4 +1,4 @@
-package dachuan.com.tianyan.view.entity;
+package dachuan.com.tianyan.model;
 
 import java.io.Serializable;
 

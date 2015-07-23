@@ -2,7 +2,6 @@ package dachuan.com.tianyan.view.activity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import butterknife.Bind;
@@ -10,8 +9,8 @@ import dachuan.com.tianyan.AppContext;
 import dachuan.com.tianyan.R;
 import dachuan.com.tianyan.view.adapter.MainViewPagerAdapter;
 import dachuan.com.tianyan.view.base.ToolBarActivity;
-import dachuan.com.tianyan.view.entity.OnLoadingFailedEntity;
-import dachuan.com.tianyan.view.entity.OnReLoadingEntity;
+import dachuan.com.tianyan.model.event.OnLoadingFailedEntity;
+import dachuan.com.tianyan.model.event.OnReLoadingEntity;
 import dachuan.com.tianyan.view.widget.StaticViewpager;
 import io.vov.vitamio.LibsChecker;
 import rx.Observable;

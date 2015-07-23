@@ -18,6 +18,7 @@
             android:layout_height="300dp"
             auto:placeholderImageScaleType="centerCrop"
             auto:placeholderImage="@mipmap/item_bg"
+            android:transitionName="Img"
             />
 
         <dachuan.com.tianyan.view.widget.BlurView
