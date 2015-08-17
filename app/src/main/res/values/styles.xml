@@ -8,8 +8,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-
-    <style name="TransparentNavigationBar" parent="AppTheme"/>
+    <style name="NoAnimation" parent="AppTheme">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
 
 
 </resources>

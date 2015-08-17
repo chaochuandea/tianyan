@@ -12,6 +12,7 @@ import java.util.List;
 
 import butterknife.Bind;
 import dachuan.com.tianyan.R;
+import dachuan.com.tianyan.model.ItemEntity;
 import dachuan.com.tianyan.view.adapter.EveryDayAdapter;
 import dachuan.com.tianyan.view.base.BaseActivity;
 
@@ -30,7 +31,7 @@ public class SortDetailAcitivity extends BaseActivity {
     @Bind(R.id.sort_list)
     RecyclerView sortList;
 
-    List<String> DataLIist = new ArrayList<String>();
+    List<ItemEntity> DataLIist = new ArrayList<ItemEntity>();
 
 
     EveryDayAdapter adapter;
@@ -58,7 +59,6 @@ public class SortDetailAcitivity extends BaseActivity {
     {
         for(int i = 0 ; i < 10 ;i ++)
         {
-            DataLIist.add("#Item " + i );
         }
     }
 

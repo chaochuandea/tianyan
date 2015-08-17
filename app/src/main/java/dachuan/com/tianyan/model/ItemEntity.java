@@ -1,13 +1,14 @@
 package dachuan.com.tianyan.model;
 
+import com.orm.SugarRecord;
+
 import java.io.Serializable;
 
 /**
  * Created by xizi@linsj on 2015/7/21.
  *
  */
-public class ItemEntity implements Serializable {
-
+public class ItemEntity extends SugarRecord<ItemEntity> implements Serializable {
 
     private String title;
 

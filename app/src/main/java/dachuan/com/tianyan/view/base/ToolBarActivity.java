@@ -1,5 +1,6 @@
 package dachuan.com.tianyan.view.base;
 
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -65,6 +66,12 @@ public abstract class ToolBarActivity extends BaseActivity {
 
     private boolean isShowDropDown = false;
     private List<View> views = new ArrayList<>();
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        initToolBar();
+    }
 
     public void initToolBar() {
         loadAnimation();

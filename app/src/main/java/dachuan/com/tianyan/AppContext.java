@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
+import com.orm.SugarApp;
+import com.orm.SugarConfig;
 import com.testin.agent.TestinAgent;
 
 import dachuan.com.tianyan.util.log.FakeCrashLibrary;
@@ -15,7 +17,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 /**
  * Created by maibenben on 2015/7/2.
  */
-public class AppContext extends Application {
+public class AppContext extends SugarApp {
 
     private static EventBus bus;
    private static AppContext instance;

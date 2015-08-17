@@ -12,6 +12,7 @@ import butterknife.ButterKnife;
 import dachuan.com.tianyan.AppManager;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action0;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
@@ -63,5 +64,10 @@ public  abstract  class BaseActivity extends AppCompatActivity {
     protected  <T> void subscribe(Observable<T> observable, Action1<? super T> onNext,Action1<Throwable> onError) {
         final Context context = this;
         subscription.add(bindActivity(this, observable.subscribeOn(Schedulers.io())).observeOn(AndroidSchedulers.mainThread()).subscribe(onNext, onError));
+    }
+
+    protected  <T> void subscribe(Observable<T> observable, Action1<? super T> onNext,Action1<Throwable> onError,Action0 onComplete) {
+        final Context context = this;
+        subscription.add(bindActivity(this, observable.subscribeOn(Schedulers.io())).observeOn(AndroidSchedulers.mainThread()).subscribe(onNext, onError,onComplete));
     }
 }

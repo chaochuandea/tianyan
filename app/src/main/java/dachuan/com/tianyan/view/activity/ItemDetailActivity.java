@@ -46,8 +46,7 @@ public class ItemDetailActivity extends ToolBarActivity {
 
     @Override
     public void init(Bundle savedInstanceState) {
-        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
-        initToolBar();
+        overridePendingTransition(0,0);
         initFragment();
         viewPager.setAdapter(new DetailViewPagerAdapter(getSupportFragmentManager(), fragments));
         tabs.setViewPager(viewPager);
@@ -104,7 +103,7 @@ public class ItemDetailActivity extends ToolBarActivity {
 
         @Override
         protected boolean isPagingEnabled() {
-            return false;
+            return  false;
         }
 
         @Override
@@ -165,8 +164,8 @@ public class ItemDetailActivity extends ToolBarActivity {
     }
 
     @Override
-    public void finish() {
-        super.finish();
-        overridePendingTransition(android.R.anim.fade_in,android.R.anim.fade_out);
+    protected void onResume() {
+        overridePendingTransition(0,0);
+        super.onResume();
     }
 }

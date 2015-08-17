@@ -2,13 +2,17 @@ package dachuan.com.tianyan.view.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -17,12 +21,16 @@ import dachuan.com.tianyan.AppContext;
 import dachuan.com.tianyan.R;
 import dachuan.com.tianyan.api.Client;
 import dachuan.com.tianyan.model.Cache;
+import dachuan.com.tianyan.model.ItemEntity;
 import dachuan.com.tianyan.task.CacheTask;
 import dachuan.com.tianyan.task.PageTask;
 import dachuan.com.tianyan.view.adapter.EveryDayAdapter;
 import dachuan.com.tianyan.view.base.BaseFragment;
 import dachuan.com.tianyan.model.event.OnReLoadingEntity;
 import rx.Observable;
+import rx.android.app.AppObservable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
@@ -45,6 +53,10 @@ public class EveryDayFragment extends BaseFragment {
     private EveryDayAdapter adapter;
 
     private List<String> datalist = new ArrayList<String>();
+
+    private Observable<List<ItemEntity>> netList;
+    private List<ItemEntity> itemList = new ArrayList<>();
+
     private static String CACHE_KEY = "main_activity_data";
 
     private View loadingItem;
@@ -68,7 +80,7 @@ public class EveryDayFragment extends BaseFragment {
         pageTask = new PageTask();
         pageTask.getPageSubject().onNext(1);
         swipe.setColorSchemeColors(Color.CYAN, Color.GREEN, Color.RED, Color.YELLOW);
-        adapter = new EveryDayAdapter(datalist, getActivity());
+        adapter = new EveryDayAdapter(itemList, getActivity());
         mainlist.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mainlist.setAdapter(adapter);
         initListener();
@@ -80,20 +92,19 @@ public class EveryDayFragment extends BaseFragment {
     private void initData() {
 
         pageTask.getPageSubject().subscribe(integer -> {
-            subscribe(Client.getApiService().getUser(token, integer).map(user1 -> {
+            subscribe(Client.getApiService().getUser(token).map(user1 -> {
                 CacheTask.getCacheSubject().onNext(new Cache(CACHE_KEY, user1));
                 return user1;
-            }).map(users -> {
-                return users.get(1).getUser().getBytes();
-            }), user -> Timber.d(user.toString()));
+            }));
         });
     }
+
 
     private void initListener() {
         swipe.setOnRefreshListener(() -> {
             isGetDataFromTop = true;
             swipe.setRefreshing(true);
-            getData();
+            getDataFromDC();
         });
         mainlist.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -130,9 +141,8 @@ public class EveryDayFragment extends BaseFragment {
                 isFirst = false;
             }
             datalist.add("last");
-        }
-        else if (!isGetDataFromTop) {
-            datalist.remove(datalist.size()-1);
+        } else if (!isGetDataFromTop) {
+            datalist.remove(datalist.size() - 1);
             for (int i = 0; i < size; i++) {
                 datalist.add("I'm Data From Bottom. No." + i + "!");
             }
@@ -163,5 +173,55 @@ public class EveryDayFragment extends BaseFragment {
         super.onDestroyView();
     }
 
+    public void getDataFromDC() {
 
+
+//        Observable.just("hello")
+//                .subscribeOn(Schedulers.newThread())
+//                .flatMap(s -> { Log.i("faltmap", Thread.currentThread().getName());return Observable.just(s);})
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .flatMap(s2 -> {
+//                    Log.i("faltmap2", Thread.currentThread().getName());
+//                    return Observable.just(s2);
+//                })
+//                .subscribe(s1 -> Log.i("subcribe", Thread.currentThread().getName()));
+
+        netList = Client.getApiService().getUser("Hello");
+//        netList
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .flatMap(itemEntities -> {Log.i("faltmap",Thread.currentThread().getName());return Observable.from(itemEntities);})
+//                .subscribeOn(Schedulers.newThread())
+//                .doOnNext(itemEntity -> Log.i("thread", Thread.currentThread().getName()))
+//                .toList()
+//                .map(itemEntities -> itemEntities.iterator())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(iterator -> {
+//                            Log.i("subscribe", Thread.currentThread().getName());
+//                            while (iterator.hasNext())
+//                                itemList.add(iterator.next());
+//                            adapter.notifyDataSetChanged();
+//                            swipe.setRefreshing(false);
+//                        }
+//                );
+
+
+
+
+        netList.subscribe(itemEntities -> new Thread() {
+            @Override
+            public void run() {
+                Looper.prepare();
+                Iterator<ItemEntity> iteartor = itemEntities.iterator();
+                while (iteartor.hasNext()) {
+                    iteartor.next().save();
+                    itemList.add(iteartor.next());
+                }
+                swipe.post(() -> {
+                    adapter.notifyDataSetChanged();
+                    swipe.setRefreshing(false);
+                });
+            }
+        }.start());
+    }
 }

@@ -9,6 +9,10 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.GET_TASKS"/>
+    <meta-data android:name="DATABASE" android:value="my_database.db" />
+    <meta-data android:name="VERSION" android:value="1" />
+    <meta-data android:name="QUERY_LOG" android:value="true" />
+    <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="dachuan.com.tianyan.model" />
     <application
         android:allowBackup="true"
         android:name=".AppContext"

@@ -29,7 +29,7 @@
             android:alpha="0.5"
            />
         <LinearLayout
-            android:id="@+id/text_layout"
+            android:id="@+id/title_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -37,24 +37,55 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/name"
+                android:id="@+id/title"
                 android:text="你他买de"
                 android:textSize="20sp"
                 android:textColor="@android:color/white"
                fontPath="fonts/Roboto-Bold.ttf"/>
-            <dachuan.com.tianyan.view.widget.LodingIcon
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tag_and_time"
-                android:textColor="@android:color/white"
-                fontPath="fonts/Roboto-ThinItalic.ttf"
-                android:layout_gravity="center"
-                android:text="s"/>
+
             <!--<ImageView-->
                 <!--android:layout_width="wrap_content"-->
                 <!--android:layout_height="wrap_content"-->
                 <!--android:id="@+id/rotate"-->
                 <!--android:src="@drawable/rotate"/>-->
+        </LinearLayout>
+        <LinearLayout
+            android:layout_below="@+id/title_layout"
+            android:id="@+id/subtitle_layout"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/white"
+                android:text="#"/>
+            <TextView
+                android:id="@+id/subtitle_sort"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/white"
+                android:text="#"/>
+            <TextView
+                android:id="@+id/subtitle_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/white"
+                android:text="#"/>
+            <TextView
+                android:id="@+id/subtitle_cached"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/white"
+                android:text="#"/>
+
+
         </LinearLayout>
 
 

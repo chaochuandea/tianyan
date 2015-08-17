@@ -2,6 +2,7 @@ package dachuan.com.tianyan.view.adapter;
 
 import com.nineoldandroids.animation.AnimatorSet;
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -19,7 +20,10 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import dachuan.com.tianyan.R;
+import dachuan.com.tianyan.model.ItemEntity;
+import dachuan.com.tianyan.util.StringUtils;
 import dachuan.com.tianyan.view.activity.ItemDetailActivity;
+import dachuan.com.tianyan.view.activity.StartActivity;
 import dachuan.com.tianyan.view.widget.BlurView;
 
 
@@ -33,11 +37,11 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
     private float firstX;
     private float firstY;
     private boolean isFlipUp;
-    private List<String> list;
+    private List<ItemEntity> list;
     private View detailView;
     private Context mcontext;
 
-    public EveryDayAdapter(List<String> list, Context context) {
+    public EveryDayAdapter(List<ItemEntity> list, Context context) {
         this.mcontext = context;
         this.list = list;
     }
@@ -58,56 +62,55 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (position + 1 == list.size()) return;
         ViewHolder viewHolder = (ViewHolder) holder;
-        viewHolder.rootView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(mcontext, ItemDetailActivity.class);
-                mcontext.startActivity(intent);
-            }
+        viewHolder.rootView.setOnClickListener(v->{
+            Intent intent = new Intent(mcontext,ItemDetailActivity.class);
+            mcontext.startActivity(intent);
         });
-        viewHolder.rootView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                AnimatorSet animatorSet = new AnimatorSet();
-                switch (event.getAction()) {
-                    case MotionEvent.ACTION_DOWN:
-                        firstX = event.getX();
-                        firstY = event.getY();
-                        animatorSet.playTogether(ObjectAnimator.ofFloat(viewHolder.textLayout, "alpha", 1.0f, 0.0f)
-                                .setDuration(500), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.5f, 0.0f)
-                                .setDuration(500));
-                        animatorSet.start();
-                        return true;
-                    case MotionEvent.ACTION_MOVE:
-                        float dx = firstX - event.getX();
-                        float dy = firstY - event.getY();
-                        if (dx == dy) break;
-                        else if (dx > dy) isFlipUp = false;
-                        else if (dx < dy) isFlipUp = true;
-                        if (isFlipUp) {
+        viewHolder.rootView.setOnTouchListener((v, event) -> {
+                    AnimatorSet animatorSet = new AnimatorSet();
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            firstX = event.getX();
+                            firstY = event.getY();
+                            animatorSet.playTogether(ObjectAnimator.ofFloat(viewHolder.textLayout, "alpha", 1.0f, 0.0f)
+                                    .setDuration(500), ObjectAnimator.ofFloat(viewHolder.subtitle_layout, "alpha", 1.0f, 0.0f)
+                                    .setDuration(500),ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.5f, 0.0f)
+                                    .setDuration(500));
+                            animatorSet.start();
+                            return true;
+                        case MotionEvent.ACTION_MOVE:
+                            float dx = firstX - event.getX();
+                            float dy = firstY - event.getY();
+                            if (dx == dy) break;
+                            else if (dx > dy) isFlipUp = false;
+                            else if (dx < dy) isFlipUp = true;
+                            if (isFlipUp) {
+                                animatorSet.playTogether(ObjectAnimator.ofFloat(viewHolder.textLayout, "alpha", 0.0f, 1.0f)
+                                        .setDuration(500),ObjectAnimator.ofFloat(viewHolder.subtitle_layout, "alpha", 0.0f, 1.0f)
+                                        .setDuration(500),ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.0f, 0.5f)
+                                        .setDuration(500));
+                                animatorSet.start();
+                                return false;
+                            } else break;
+                        case MotionEvent.ACTION_UP:
+                            viewHolder.rootView.performClick();
+                        case MotionEvent.ACTION_OUTSIDE:
+                        case MotionEvent.ACTION_CANCEL:
                             animatorSet.playTogether(ObjectAnimator.ofFloat(viewHolder.textLayout, "alpha", 0.0f, 1.0f)
+                                    .setDuration(500), ObjectAnimator.ofFloat(viewHolder.subtitle_layout, "alpha", 0.0f, 1.0f)
                                     .setDuration(500), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.0f, 0.5f)
                                     .setDuration(500));
                             animatorSet.start();
-                            return false;
-                        } else break;
-                    case MotionEvent.ACTION_UP:
-                        viewHolder.rootView.performClick();
-                    case MotionEvent.ACTION_OUTSIDE:
-                    case MotionEvent.ACTION_CANCEL:
-                        animatorSet.playTogether(ObjectAnimator.ofFloat(viewHolder.textLayout, "alpha", 0.0f, 1.0f)
-                                .setDuration(500), ObjectAnimator.ofFloat(viewHolder.coverView, "alpha", 0.0f, 0.5f)
-                                .setDuration(500));
-                        animatorSet.start();
-                        break;
+                            break;
+                    }
+                    return false;
                 }
-                return false;
-            }
-        });
-        viewHolder.name.setText("Hello , " + list.get(position));
+        );
+        viewHolder.name.setText("Hello , " + list.get(position).getTitle());
+        viewHolder.cached.setText(list.get(position).isCached()?"已经缓存":"未缓存");
+        viewHolder.duration.setText(String.valueOf(list.get(position).getDuration()));
+        viewHolder.sort.setText(list.get(position).getSort());
 //        viewHolder.coverView.setRadius(1).setScalFactor(100).setTarget(viewHolder.bgImg).refresh();
-
-
     }
 
     @Override
@@ -125,11 +128,11 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
     static class ViewHolder extends RecyclerView.ViewHolder {
 
 
-        @Bind(R.id.name)
+        @Bind(R.id.title)
         TextView name;
-        @Bind(R.id.tag_and_time)
-        TextView tag_and_time;
-        @Bind(R.id.text_layout)
+//        @Bind(R.id.tag_and_time)
+//        TextView tag_and_time;
+        @Bind(R.id.title_layout)
         View textLayout;
         @Bind(R.id.view_cover)
         BlurView coverView;
@@ -137,6 +140,18 @@ public class EveryDayAdapter extends RecyclerView.Adapter {
         @Bind(R.id.cover_bg)
         SimpleDraweeView bgImg;
         View rootView;
+
+        @Bind(R.id.subtitle_cached)
+        TextView cached;
+
+        @Bind(R.id.subtitle_duration)
+        TextView duration;
+
+        @Bind(R.id.subtitle_sort)
+        TextView sort;
+
+        @Bind(R.id.subtitle_layout)
+        View subtitle_layout;
 
         public ViewHolder(View itemView) {
             super(itemView);

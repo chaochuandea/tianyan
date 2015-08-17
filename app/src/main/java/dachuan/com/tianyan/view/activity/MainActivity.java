@@ -79,7 +79,6 @@ public class MainActivity extends ToolBarActivity implements View.OnClickListene
     public void init(Bundle savedInstanceState) {
         if (!LibsChecker.checkVitamioLibs(this))
             return;
-        initToolBar();
         AppContext.instance().getBus().register(this);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
